@@ -32,7 +32,7 @@ Users are responsible for proper configuration and implementation within their e
 📜 License
 Traffic-Prism is licensed under dual license - Server Side Public License (SSPL) and Commercial one. SSPL license ensures that:
 
-Anyone can use, modify, and distribute the software freely.
+Anyone can use, modify software for internal use.
 
 If you offer Traffic-Prism as a service (e.g., SaaS), you must also open-source your entire stack under the SSPL.
 
