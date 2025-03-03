@@ -53,7 +53,7 @@ Please contact us at pbi@bayesiananalytics.in to discuss commercial licensing op
 
 We cover basic XSS / DOM XSS attacks in this code base. 
 
-There are advanced XSS attacks/LDAP attacks that typically are experiecned by high risk websites such as banks.
+There are advanced XSS attacks/LDAP attacks/Polyglots that typically are experienced by high risk websites such as banks.
 
 But to counter them we need to track lot more data points like XSS headers which may impact performance.
 
@@ -63,7 +63,7 @@ We offer consulting services/ training on how it can be implemented.
 
 Gen AI and LLM provide extra scoring engine that is highly effective against zero day vulnerabilities. 
 
-Our software mainly risk-analysis.ejs has the placeholder to either include API or your custom model and directly get Gen AI risk scores. 
+Our software component risk-analysis.ejs has the placeholder to either include API or your custom model and directly get Gen AI risk scores. 
 
 However owing to extreme dynamic nature and frequent changes (DeepSeek was recent such event) we have left it to end users to implement their Gen AI model.
 
@@ -97,14 +97,19 @@ Early Adopters: For testing and providing feedback during the development phase.
 Our roadmap includes:
 
 IoT Security: Extending our platform to secure IoT devices like smart meters.
+
 Cloud Integration: Adding native support for cloud environments.
-New Modules: Developing modules for emerging threats (e.g., API security, container protection).
+
+New Modules: Developing modules for emerging threats (e.g., API security, container protection,EDR enhancements).
+
 Stay tuned for updates!
 
 ❤️ Support Us
 If you find Traffic-Prism valuable, consider supporting us:
 
 Star the Repository: Show your appreciation by starring this repo once it's live on GitHub.
+
 Partner: Collaborate with us to enhance the ecosystem.
+
 Thank you for being part of the Traffic-Prism journey. Together, we can make the internet safer for everyone! 
 🌐🔒
