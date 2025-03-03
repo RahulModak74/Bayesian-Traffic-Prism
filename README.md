@@ -1,5 +1,6 @@
 Bayesian Traffic-Prism: Open-Source Web Security for All
-(DEMO link: https://youtu.be/yvqCLUvt_vM?si=3tNy8ynlxhxN-SJJ)
+
+
 ⚠️ Disclaimer
 Traffic-Prism is provided "as is" without any warranties, express or implied. By using this software, you acknowledge that you are doing so at your own risk. The developers and contributors are not responsible for any damage or liability arising from the use of this software. See LICENSE.txt for complete disclaimer details.
 
@@ -80,4 +81,7 @@ If you find Traffic-Prism valuable, consider supporting us:
 
 Star the Repository: Show your appreciation by starring this repo once it's live on GitHub.
 Partner: Collaborate with us to enhance the ecosystem.
-Thank you for being part of the Traffic-Prism journey. Together, we can make the internet safer for everyone! 🌐🔒
+Thank you for being part of the Traffic-Prism journey. Together, we can make the internet safer for everyone! 
+(DEMO link: https://youtu.be/yvqCLUvt_vM?si=3tNy8ynlxhxN-SJJ)
+
+(DEMO link: https://youtu.be/yvqCLUvt_vM?si=3tNy8ynlxhxN-SJJ)🌐🔒
