@@ -1,7 +1,7 @@
 # GenAI & LLM Integration for Advanced Cybersecurity
 
 ## Overview
-GenAI and LLM technologies provide excellent potential for zero-day attack detection and custom risk modeling. While our open-source solution offers robust protection, our specialized GenAI consulting services can enhance your security posture for high-risk environments.
+GenAI and LLM technologies provide excellent potential for zero-day attack detection and custom risk modeling. While our open-source solution offers robust protection,  specialized GenAI services can enhance your security posture for high-risk environments.
 
 ## Implementation Options
 
@@ -12,7 +12,7 @@ GenAI and LLM technologies provide excellent potential for zero-day attack detec
 
 ## Our Consulting Approach
 
-Our GenAI consulting services help you:
+Our GenAI consulting services can help you:
 - Develop custom risk models tailored to your specific threat landscape
 - Implement advanced pattern recognition for complex attack chains
 - Create specialized LLM prompts for your security context
@@ -20,9 +20,10 @@ Our GenAI consulting services help you:
 
 ## Engagement Options
 
-For organizations requiring specialized GenAI and LLM implementations:
+For organizations requiring specialized GenAI and LLM implementations in Traffic Prism:
 - One-day assessment and recommendation workshop
 - Three-day implementation assistance
-- Two-week custom model development program
+- Two-week custom model development guidelines program. We recommend unsloth.ai for model development.
+- Custom development option with pymc3 bayesian statistics based risk score (OLAP + Gen AI).
 
-Contact us pbi@bayesiananalytics.in to discuss how our GenAI consulting can complement your implementation of Bayesian Cybersecurity with OLAP.
+Contact us pbi@bayesiananalytics.in to discuss how our GenAI consulting can complement your Bayesian Cybersecurity  OLAP engine.
