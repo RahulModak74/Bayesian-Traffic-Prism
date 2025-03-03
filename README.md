@@ -125,8 +125,7 @@ New Modules: Developing modules for emerging threats (e.g., API security, contai
 
 Stay tuned for updates!
 
-❤️ Support Us
-If you find Traffic-Prism valuable:
+❤️ If you find Traffic-Prism valuable:
 
 Star the Repository: Show your appreciation by starring this repo once it's live on GitHub.
 
