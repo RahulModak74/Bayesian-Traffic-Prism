@@ -10,13 +10,17 @@ Create reverse proxy using nginx from 443 to 8000.
 
 4. Clone the repo and install all packages and run app.js (ideally with pm2)
 
-5. All the visits on your website shud be tracked inside tracking10 table
+5. All the visits on your website should be tracked inside tracking10 table
 
-6. You will need to deicde which IP config tracking npm package you want to use and install it accordingly and create list of all cities available and load it in table region_details
+6. You will need to decide which IP config tracking npm package you want to use and install it accordingly and create list of all cities available and load it in table region_details
 
 7. Set default user name and pwd in users table 
 
 8. Go to https://metrics.mydomain.com
+
+9. In order to store historic session risk score run the historic_session_risk.js file by changing the host,startDate,startDate one csv will be generated with name example 'enhanced_risk_data_abc_2025-0-01.csv' and then insert that into the updated_hist_session_risk_scores table by running the below command 
+
+clickhouse-client --query="INSERT INTO default.updated_hist_session_risk_scores FORMAT CSVWithNames" < enhanced_risk_data_abc_2025-0-01.csv
 
 
 Installation may be bit complex you can simply use our docker instance which will take care of all steps expcet #3 which you will need to do manually
