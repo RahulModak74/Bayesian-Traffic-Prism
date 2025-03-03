@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Cybersecurity Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .icon-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .icon-container i {
+            font-size: 60px;
+            margin: 10px;
+            color: #dc3545;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #dc3545;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .home-btn {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .home-btn:hover {
+            background-color: #003d80;
+        }
+        .error-details {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            text-align: left;
+            font-family: monospace;
+            white-space: pre-wrap;
+            color: #dc3545;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><%= message %></h1>
+        <div class="icon-container">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        
+        <p>An error occurred while processing your request.</p>
+        
+        <% if (error && error.status) { %>
+            <p>Status: <%= error.status %></p>
+        <% } %>
+        
+        <% if (process.env.NODE_ENV === 'development' && error && error.stack) { %>
+            <div class="error-details">
+                <%= error.stack %>
+            </div>
+        <% } %>
+        
+        <a href="/" class="home-btn">Return to Home</a>
+    </div>
+</body>
+</html>

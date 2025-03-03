@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next-Gen Cyber Platform</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 80px;
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            transition: width 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar.open {
+            width: 250px;
+        }
+
+        .sidebar .dashboard-text {
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        .sidebar.open .dashboard-text {
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            color: white;
+            text-decoration: none;
+            border: 2px solid white;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s, width 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .sidebar i {
+            margin-right: 10px;
+            transition: margin-right 0.3s;
+        }
+
+        .sidebar.closed i {
+            margin-right: 0;
+        }
+
+        .sidebar .link-text {
+            transition: opacity 0.3s, width 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            opacity: 0;
+            width: 0;
+        }
+
+        .sidebar.open .link-text {
+            opacity: 1;
+            width: auto;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Dark mode toggle button at the top right */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .dark-mode-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .dark-mode-toggle label {
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dark-mode-toggle label::after {
+            content: '';
+            display: block;
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        input[type="checkbox"]:checked+label::after {
+            transform: translateX(30px);
+        }
+
+        input[type="checkbox"]:checked+label {
+            background-color: #333;
+        }
+
+        .dark-mode-toggle span {
+            margin-left: 10px;
+            font-weight: bold;
+            color: black;
+        }
+
+        /* New styles for dropdown menu */
+        .sub-menu {
+            padding-left: 0;
+            /* Remove left padding */
+            display: none;
+            list-style: none;
+            width: 100%;
+            /* Make the dropdown width same as sidebar */
+        }
+
+        .sub-menu li {
+            margin: 0;
+            /* Remove margin from list items */
+        }
+
+        .sub-menu a {
+            padding: 10px 15px;
+            /* Consistent padding for dropdown items */
+            display: flex;
+            /* Ensure icons and text align properly */
+            align-items: center;
+            /* Vertically center the items */
+        }
+
+
+        .arrow {
+            float: right;
+        }
+
+        /* Hide link-text when the sidebar is collapsed */
+        .sidebar.closed .link-text {
+            display: none;
+            /* Hide the text when the sidebar is closed */
+        }
+
+        .sidebar.open .link-text {
+            width: auto;
+            /* Allow it to expand when open */
+            opacity: 1;
+            /* Ensure opacity is 1 */
+        }
+
+        /* New styles for the sub-menu link text */
+        .sub-menu .link-text {
+            display: none;
+            /* Hide link text by default */
+        }
+
+        .sidebar.open .sub-menu .link-text {
+            display: inline;
+            /* Show link text when sidebar is open */
+        }
+
+        .sidebar.closed .sub-menu .link-text {
+            display: none;
+            /* Hide link text when sidebar is closed */
+        }
+
+        .sidebar.closed .sub-menu a {
+            justify-content: center;
+            /* Center icons when sidebar is closed */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="sidebar closed" id="sidebar">
+            <button class="toggle-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <span class="dashboard-text">Dashboard</span>
+
+            <!-- Actions Dropdown -->
+            <div class="dropdown">
+                <a href="#" onclick="toggleDropdown(event, 'actions-dropdown')" data-bs-toggle="tooltip"
+                    title="Actions">
+                    <i class="fas fa-tasks"></i>
+                    <span class="link-text">Actions</span>
+                    <span class="arrow">&#x25BC;</span>
+                </a>
+                <ul class="sub-menu" id="actions-dropdown">
+                    <li><a href="#" onclick="loadContent('/admin', this)" data-bs-toggle="tooltip" title="Nudge">
+                            <i class="fas fa-bell"></i>
+                            <span class="link-text">Nudge</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/session-management/terminate-session', this)"
+                            data-bs-toggle="tooltip" title="Terminate">
+                            <i class="fas fa-stop-circle"></i>
+                            <span class="link-text">Terminate</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/session-management/send-captcha', this)"
+                            data-bs-toggle="tooltip" title="Send Captcha">
+                            <i class="fas fa-lock"></i>
+                            <span class="link-text">Send Captcha</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/rules', this)" data-bs-toggle="tooltip" title="Rules">
+                            <i class="fas fa-gavel"></i>
+                            <span class="link-text">Rules</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/genai', this)" data-bs-toggle="tooltip"
+                            title="GenAI Recommendation">
+                            <i class="fas fa-brain"></i>
+                            <span class="link-text">GenAI Recommendation</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/session-summary', this)" data-bs-toggle="tooltip"
+                            title="Session Summary">
+                            <i class="fas fa-brain"></i>
+                            <span class="link-text">Session Summary</span>
+                        </a></li>
+                </ul>
+            </div>
+
+            <!-- Score Dropdown -->
+            <div class="dropdown">
+                <a href="#" onclick="toggleDropdown(event, 'score-dropdown')" data-bs-toggle="tooltip" title="Score">
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="link-text">Score</span>
+                    <span class="arrow">&#x25BC;</span>
+                </a>
+                <ul class="sub-menu" id="score-dropdown">
+                    <li><a href="#" onclick="loadContent('/risk-analysis', this)" data-bs-toggle="tooltip"
+                            title="Risk Analysis">
+                            <i class="fas fa-route"></i>
+                            <span class="link-text">Real Time Risk</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/updated-session-risk-analysis', this)" data-bs-toggle="tooltip"
+                            title="Historic Session Risk Scores">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="link-text">Historic Session Risk Scores</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/ip-risk', this)" data-bs-toggle="tooltip"
+                            title="IP Risk Scores">
+                            <i class="fas fa-network-wired"></i>
+                            <span class="link-text">IP Risk Scores</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/suspicious-activity', this)" data-bs-toggle="tooltip"
+                            title="Suspicious Activity">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="link-text">IP Risk Third Party</span>
+                        </a></li>
+
+                    <li><a href="#" onclick="loadContent('/browser-risk', this)" data-bs-toggle="tooltip"
+                            title="Browser Risk Scores">
+                            <i class="fas fa-globe"></i>
+                            <span class="link-text">Browser Risk Scores</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/admin/rawreport', this)" data-bs-toggle="tooltip"
+                            title="Session Users">
+                            <i class="fas fa-user-clock"></i>
+                            <span class="link-text">Session Users</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/session-journey', this)" data-bs-toggle="tooltip"
+                            title="Session Journey">
+                            <i class="fas fa-route"></i>
+                            <span class="link-text">Session Journey</span>
+                        </a></li>
+
+
+
+                </ul>
+            </div>
+
+            <!-- Reports Dropdown -->
+            <div class="dropdown">
+                <a href="#" onclick="toggleDropdown(event, 'reports-dropdown')" data-bs-toggle="tooltip"
+                    title="Reports">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="link-text">Reports</span>
+                    <span class="arrow">&#x25BC;</span>
+                </a>
+                <ul class="sub-menu" id="reports-dropdown">
+                    <li><a href="#" onclick="loadContent('/bot-requests', this)" data-bs-toggle="tooltip"
+                            title="Bot Requests">
+                            <i class="fas fa-robot"></i>
+                            <span class="link-text">Bot Requests</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/bot-details', this)" data-bs-toggle="tooltip"
+                            title="Bot Details">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="link-text">Bot Details</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/bot-overview', this)" data-bs-toggle="tooltip"
+                            title="Bot Overview">
+                            <i class="fas fa-chart-pie"></i>
+                            <span class="link-text">Bot Overview</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/suspicious-activity', this)" data-bs-toggle="tooltip"
+                            title="Suspicious Activity">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="link-text">Suspicious Activity</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/unusualbotactivity', this)" data-bs-toggle="tooltip"
+                            title="Unusual Bot Activity">
+                            <i class="fas fa-user-secret"></i>
+                            <span class="link-text">Unusual Bot Activity</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/scrapinganalysis', this)" data-bs-toggle="tooltip"
+                            title="Scraping Analysis">
+                            <i class="fas fa-search"></i>
+                            <span class="link-text">Scraping Analysis</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/suspicious-referrers', this)" data-bs-toggle="tooltip"
+                            title="Suspicious Referrers for Bots">
+                            <i class="fas fa-link"></i>
+                            <span class="link-text">Suspicious Referrers for Bots</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/mimic-bot', this)" data-bs-toggle="tooltip"
+                            title="Mimic Bots">
+                            <i class="fas fa-user-ninja"></i>
+                            <span class="link-text">Mimic Bots</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/csrf-detection', this)" data-bs-toggle="tooltip"
+                            title="CSRF Detection">
+                            <i class="fas fa-shield-alt"></i>
+                            <span class="link-text">CSRF Detection</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/highfrequencyreport', this)" data-bs-toggle="tooltip"
+                            title="High Frequency Report">
+                            <i class="fas fa-wave-square"></i>
+                            <span class="link-text">High Frequency Report</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/malicious-requests', this)" data-bs-toggle="tooltip"
+                            title="Malicious Report">
+                            <i class="fas fa-virus"></i>
+                            <span class="link-text">Malicious Report</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/sessionswithoutip', this)" data-bs-toggle="tooltip"
+                            title="Sessions Without IP">
+                            <i class="fas fa-eye-slash"></i>
+                            <span class="link-text">Sessions Without IP</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/suspiciousUserAgents', this)" data-bs-toggle="tooltip"
+                            title="Suspicious User Agents">
+                            <i class="fas fa-fingerprint"></i>
+                            <span class="link-text">Suspicious User Agents</span>
+                        </a></li>
+                    <li><a href="#" onclick="loadContent('/potentialscraping', this)" data-bs-toggle="tooltip"
+                            title="Potential Scraping">
+                            <i class="fas fa-spider"></i>
+                            <span class="link-text">Potential Scraping</span>
+                        </a></li>
+                </ul>
+            </div>
+
+            <a href="/logout" class="logout" data-bs-toggle="tooltip" title="Logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="link-text">Logout</span>
+            </a>
+        </div>
+
+
+        <div class="content">
+            <!-- <div class="dark-mode-toggle">
+                <input type="checkbox" id="dark-mode-toggle">
+                <label for="dark-mode-toggle"></label>
+                <span>Dark Mode</span>
+            </div> -->
+            <div class="content" id="contentArea">
+                <div class="hero">
+                    <h1>Cyber Sec at its peak</h1>
+                    <p>Empower your cyber team with real-time insights and data-driven strategies. Bayesian Cyber
+                        provides
+                        comprehensive tools to track, analyze, and engage threats through a single, unified platform.
+                    </p>
+                    <img src="cyber_security_img.jpg" alt="cyber_security_img">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // function toggleSidebar() {
+        //     const sidebar = document.getElementById('sidebar');
+        //     sidebar.classList.toggle('closed');
+        //     sidebar.classList.toggle('open');
+
+        //     // Update the display of sub-menu items
+        //     const subMenu = document.getElementById('ui-elements');
+        //     const isOpen = sidebar.classList.contains('open');
+        //     const subMenuLinks = subMenu.querySelectorAll('a');
+
+        //     subMenuLinks.forEach(link => {
+        //         const linkText = link.querySelector('.link-text');
+        //         if (isOpen) {
+        //             linkText.style.display = 'inline';
+        //         } else {
+        //             linkText.style.display = 'none';
+        //         }
+        //     });
+        // }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('closed');
+            sidebar.classList.toggle('open');
+
+            const subMenu = sidebar.querySelectorAll('.sub-menu');
+            const isOpen = sidebar.classList.contains('open');
+
+            subMenu.forEach(menu => {
+                const links = menu.querySelectorAll('a');
+                links.forEach(link => {
+                    const linkText = link.querySelector('.link-text');
+                    if (isOpen) {
+                        linkText.style.display = 'inline';
+                        linkText.textContent = linkText.textContent.length > 20
+                            ? linkText.textContent.substring(0, 20) + '...'
+                            : linkText.textContent;
+                    } else {
+                        linkText.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        function toggleDropdown(event, dropdownId) {
+            event.preventDefault();
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function loadContent(url, element) {
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = 'Loading...';
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    contentArea.innerHTML = html;
+                    // disableTooltip(element);
+                })
+                .catch(error => {
+                    contentArea.innerHTML = 'Error loading the content';
+                    console.error(error);
+                });
+        }
+
+        document.getElementById('dark-mode-toggle').addEventListener('change', function () {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+<!--  -->

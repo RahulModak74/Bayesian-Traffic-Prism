@@ -1,0 +1,143 @@
+ CREATE TABLE default.tracking10
+(
+    `id` Int32,
+    `timestamp` DateTime64(3, 'UTC'),
+    `url` String,
+    `referrer` String,
+    `ip_address` String,
+    `user_agent` String,
+    `platform` String,
+    `language` String,
+    `hostname` String,
+    `session_id` String,
+    `browser_id` String,
+    `fingerprint_id` String,
+    `clickdata` String,
+    `enhanced_data_id` Int64
+)
+ENGINE = MergeTree
+ORDER BY id
+SETTINGS index_granularity = 8192 │
+
+
+CREATE TABLE default.updated_hist_session_risk_scores
+(
+    `session_id` String,
+    `total_risk_score` Float64,
+    `browser_risk` Float64,
+    `login_risk` Float64,
+    `ip_risk` Float64,
+    `freq_risk` Float64,
+    `bot_risk` Float64,
+    `geo_risk` Float64,
+    `xss_risk` Float64,
+    `redirect_risk` Float64,
+    `ssrf_risk` Float64,
+    `sqli_risk` Float64,
+    `request_count` UInt32,
+    `distinct_ip_count` UInt32,
+    `login_attempts` UInt32,
+    `session_duration` UInt32,
+    `url_change_count` UInt32,
+    `action_recommendations` String,
+    `host` String,
+    `timestamp` DateTime
+)
+ENGINE = MergeTree
+ORDER BY (session_id, timestamp)
+SETTINGS index_granularity = 8192 │
+
+
+CREATE TABLE default.region_details
+(
+    `id` Int32,
+    `ip_address` String,
+    `country` String,
+    `region` String,
+    `city` String
+)
+ENGINE = MergeTree
+ORDER BY id
+SETTINGS index_granularity = 8192 │
+
+
+
+
+CREATE TABLE default.live_sessions_mv
+(
+    `session_id` String,
+    `browser_id` String,
+    `last_activity` DateTime,
+    `first_activity` DateTime,
+    `url` String,
+    `referrer` String,
+    `ip_address` String,
+    `user_agent` String,
+    `hostname` String,
+    `timestamp` DateTime64(3)
+)
+ENGINE = MergeTree
+PARTITION BY toYYYYMM(last_activity)
+ORDER BY (session_id, browser_id, timestamp)
+TTL last_activity + toIntervalMinute(5)
+SETTINGS index_granularity = 8192 │
+
+
+CREATE TABLE default.users
+(
+    `username` String,
+    `passwordHash` String,
+    `hostname` String,
+    `version` UInt32
+)
+ENGINE = ReplacingMergeTree(version)
+ORDER BY (username, hostname)
+SETTINGS index_granularity = 8192 │
+
+
+ CREATE TABLE default.rules
+(
+    `id` UInt32,
+    `rule` String,
+    `hostname` String,
+    `name` String,
+    `creation_time` DateTime,
+    `last_edit_time` DateTime,
+    `version` UInt32,
+    `action_time` UInt32,
+    `action` String
+)
+ENGINE = MergeTree
+PRIMARY KEY (id, version)
+ORDER BY (id, version)
+SETTINGS index_granularity = 8192 │
+
+
+CREATE TABLE default.action_logs
+(
+    `action` String,
+    `timestamp` DateTime,
+    `sessions` String
+)
+ENGINE = ReplacingMergeTree
+ORDER BY timestamp
+SETTINGS index_granularity = 8192 │
+
+
+CREATE TABLE default.hist_session_risk_scores
+(
+    `session_id` String,
+    `total_risk_score` UInt8,
+    `multiple_sessions` UInt8,
+    `multiple_login_attempts` UInt8,
+    `multiple_ip_addresses` UInt8,
+    `high_request_frequency` UInt8,
+    `suspicious_user_agent` UInt8,
+    `unusual_geolocation_changes` UInt8,
+    `action_recommendations` String,
+    `host` String,
+    `timestamp` DateTime DEFAULT now()
+)
+ENGINE = MergeTree
+ORDER BY (session_id, timestamp)
+SETTINGS index_granularity = 8192 │

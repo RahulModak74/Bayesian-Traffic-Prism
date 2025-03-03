@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Activity Scores</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        form {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        form input[type="date"] {
+            padding: 10px;
+            width: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .score-cell {
+            text-align: center;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+            margin: 0 2px;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .user-agents {
+            max-height: 100px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        IP Activity Scores
+    </header>
+
+    <div class="container">
+        <!-- Search Form -->
+        <form action="/ip_risk_scores" method="get">
+            <input type="date" id="start_date" name="start_date" value="<%= start_date %>">
+            <input type="date" id="end_date" name="end_date" value="<%= end_date %>">
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Table Container -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>Total Risk Score</th>
+                        <th>Bot Detection</th>
+                        <th>High Request Freq</th>
+                        <th>Multiple User Agents</th>
+                        <th>Suspicious Login</th>
+                        <th>Suspicious Session</th>
+                        <th>Suspicious URL</th>
+                        <th>High Error Rates</th>
+                        <th>Requests/Day</th>
+                        <th>Total Requests</th>
+                        <th>Active Days</th>
+                        <th>Is Bot</th>
+                        <th>Bot UA Count</th>
+                        <th>Recommended Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% results.forEach(function(result) { %>
+                        <tr>
+                            <td title="<%= result['IP Address'] %>"><%= result['IP Address'] %></td>
+                            <td class="score-cell"><%= result['Total Risk Score'] %></td>
+                            <td class="score-cell"><%= result['Bot Detection Score'] %></td>
+                            <td class="score-cell"><%= result['High Request Frequency Score'] %></td>
+                            <td class="score-cell"><%= result['Multiple User Agents Score'] %></td>
+                            <td class="score-cell"><%= result['Suspicious Login Patterns Score'] %></td>
+                            <td class="score-cell"><%= result['Suspicious Session Patterns Score'] %></td>
+                            <td class="score-cell"><%= result['Suspicious URL Patterns Score'] %></td>
+                            <td class="score-cell"><%= result['High Error Rates Score'] %></td>
+                            <td class="score-cell"><%= result['Requests Per Day'] %></td>
+                            <td class="score-cell"><%= result['Total Requests'] %></td>
+                            <td class="score-cell"><%= result['Active Days'] %></td>
+                            <td><%= result['Is Bot'] %></td>
+                            <td class="score-cell"><%= result['Bot User Agent Count'] %></td>
+                            <td><%= result['Recommended Action'] %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <% for(let i = 1; i <= totalPages; i++) { %>
+                <a href="/ip_risk_scores?start_date=<%= start_date %>&end_date=<%= end_date %>&page=<%= i %>"
+                   class="<%= currentPage === i ? 'active' : '' %>">
+                    <%= i %>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

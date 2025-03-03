@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI Recommendation</title>
+    <style>
+        /* Your provided styles */
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+            /* Makes columns fixed width to force wrapping */
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+            word-wrap: break-word;
+            /* Forces wrapping inside table cells */
+            overflow: hidden;
+            white-space: normal;
+            /* Ensures long text wraps to next line */
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 10%;
+            /* Adjust this value as needed */
+            text-align: center;
+            /* Align the number in the center */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        GenAI Recommendation
+    </header>
+
+    <div class="container">
+
+        <!-- Table with hardcoded data -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Journey</th>
+                    <th>Gen AI Recommendation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Date Time(IST-5.30) Time Spent (seconds) URL Visited Clicked Data
+                        2024-09-20 01:58:46 8
+                        https://myraymond.com/?categoryName=Ethnix%20By%20Raymond&f.product_cat=%2C5ee730b060a2ba066045b67a&page=1&vendor=5e50be7e41dbd25a70779730
+                        ""
+                        2024-09-20 01:58:54 63 https://myraymond.com/collections/raymond ""
+                        2024-09-20 01:59:57 63 https://myraymond.com/collections/sweaters ""
+                        2024-09-20 02:01:01 29 https://myraymond.com/collections/sweatshirts ""
+                        2024-09-20 02:01:29 9 https://myraymond.com/collections/jackets ""
+                        2024-09-20 02:01:38 - https://myraymond.com/collections/sweatshirts ""</td>
+                    <td>Model Output: Session Risk Score: 2/10<br>
+                        <br>
+                        Action Recommendations (Probabilities):<br>
+                        No interference: 90%<br>
+                        Send Captcha: 5%<br>
+                        Terminate and Redirect: 5%<br>
+                        <br>
+                        Reasons for Recommendations:
+                        The session exhibits normal browsing behavior, with a logical progression through product
+                        categories and consistent IP/User-Agent usage. The time spent per page is moderate, and there
+                        are no suspicious indicators of bot-like scraping or malicious activity.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Date Time(IST-5.30) Time Spent (seconds) URL Visited Clicked Data
+                        2024-09-29 19:45:47 41
+                        https://myraymond.com/collections/pay-day-sale?utm_source=adyogi&utm_medium=fb&utm_campaign=RAYM_9286_adyogi_Conversions_Prospect_lifetime_Newsfeed-120211948247820417&utm_content=2311077+SIM_Parx_Payday_27Sep24&fbclid=IwZXh0bgNhZW0BMAABHSWqfXUU1VFt72_sTaPrzXDqHsIheoKapB3s2kfg_oxB5GbrfxPtdka6ZQ_aem_YFQU9kcCTaOl7suwkzq3tA&campaign_id=120211948247810417&ad_id=120212247056130417&utm_id=120211948247820417_v2_s02_e2&utm_term=120211948247810417
+                        ""
+                        2024-09-29 19:46:28 43 https://myraymond.com/collections/belts-wallets ""
+                        2024-09-29 19:47:11 21
+                        https://myraymond.com/collections/pay-day-sale?utm_source=adyogi&utm_medium=fb&utm_campaign=RAYM_9286_adyogi_Conversions_Prospect_lifetime_Newsfeed-120211948247820417&utm_content=2311077+SIM_Parx_Payday_27Sep24&fbclid=IwZXh0bgNhZW0BMAABHSWqfXUU1VFt72_sTaPrzXDqHsIheoKapB3s2kfg_oxB5GbrfxPtdka6ZQ_aem_YFQU9kcCTaOl7suwkzq3tA&campaign_id=120211948247810417&ad_id=120212247056130417&utm_id=120211948247820417_v2_s02_e2&utm_term=120211948247810417
+                        ""
+                        2024-09-29 19:47:32 481 https://myraymond.com/pages/searchtap-search?q=Belts%20%26%20Wallets ""
+                        2024-09-29 19:55:33 0 https://myraymond.com/collections/sweaters ""
+                        2024-09-29 19:55:33 71 https://myraymond.com/collections/sweaters ""
+                        2024-09-29 19:56:44 5 https://myraymond.com/pages/searchtap-search?q=Belts%20%26%20Wallets ""
+                        2024-09-29 19:56:49 14
+                        https://myraymond.com/collections/pay-day-sale?utm_source=adyogi&utm_medium=fb&utm_campaign=RAYM_9286_adyogi_Conversions_Prospect_lifetime_Newsfeed-120211948247820417&utm_content=2311077+SIM_Parx_Payday_27Sep24&fbclid=IwZXh0bgNhZW0BMAABHSWqfXUU1VFt72_sTaPrzXDqHsIheoKapB3s2kfg_oxB5GbrfxPtdka6ZQ_aem_YFQU9kcCTaOl7suwkzq3tA&campaign_id=120211948247810417&ad_id=120212247056130417&utm_id=120211948247820417_v2_s02_e2&utm_term=120211948247810417
+                        ""
+                        2024-09-29 19:57:03 43 https://myraymond.com/collections/sweatshirts ""
+                        2024-09-29 19:57:46 108
+                        https://myraymond.com/products/men-black-tailored-fit-solid-cotton-polyester-blend-full-sleeve-henley-neck-collar-sweatshirts-1
+                        ""
+                        2024-09-29 19:59:34 7 https://myraymond.com/collections/sweatshirts ""
+                        2024-09-29 19:59:41 11
+                        https://myraymond.com/collections/pay-day-sale?utm_source=adyogi&utm_medium=fb&utm_campaign=RAYM_9286_adyogi_Conversions_Prospect_lifetime_Newsfeed-120211948247820417&utm_content=2311077+SIM_Parx_Payday_27Sep24&fbclid=IwZXh0bgNhZW0BMAABHSWqfXUU1VFt72_sTaPrzXDqHsIheoKapB3s2kfg_oxB5GbrfxPtdka6ZQ_aem_YFQU9kcCTaOl7suwkzq3tA&campaign_id=120211948247810417&ad_id=120212247056130417&utm_id=120211948247820417_v2_s02_e2&utm_term=120211948247810417
+                        ""
+                        2024-09-29 19:59:52 - https://myraymond.com/collections/jackets ""</td>
+                    <td>Model Output: Session Risk Score: 6/10 <br>
+                        <br>
+                        Action Recommendations (Probabilities):<br>
+                        No interference: 20%<br>
+                        Send Captcha: 60%<br>
+                        Terminate and Redirect: 20%<br>
+                        <br>
+                        Reasons for Recommendations:<br>
+                        
+                        The session exhibits some suspicious behavior, such as rapid navigation between categories
+                        (e.g., from "pay-day-sale" to "sweaters") and multiple visits to the same page with short time
+                        spent on it. However, the traffic is coming from a trusted source (Adyogi) and the user-agent
+                        string does not indicate any malicious activity. The session also shows some logical progression
+                        through the site, which suggests that it might be a legitimate user. Therefore, sending a
+                        Captcha seems to be the most appropriate action at this point.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+
+</html>

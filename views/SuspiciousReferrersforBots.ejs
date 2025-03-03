@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspicious Referrers for Bots</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input, button {
+            padding: 8px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            table-layout: fixed; /* Ensures the table cells take up a fixed width */
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            word-wrap: break-word; /* Allows content to break within the cell */
+            white-space: nowrap; /* Prevents text from wrapping to the next line */
+            overflow: hidden; /* Hides the overflow content */
+            text-overflow: ellipsis; /* Adds ellipsis (...) for overflow text */
+        }
+
+        td:nth-child(3) {
+            width: 100px; /* Sets a fixed width for the Request Count column */
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Suspicious Referrers for Bots for Hostname: <%= data.length > 0 ? data[0].hostname : 'Unknown' %>
+    </header>
+
+    <div class="container">
+        <form method="GET" action="/SuspiciousReferrersforBots">
+            <label for="custom_url">Custom URL:</label>
+            <input type="text" id="custom_url" name="custom_url" value="<%= custom_url %>">
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="<%= start_date %>">
+
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="<%= end_date %>">
+
+            <button type="submit">Filter</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>User Agent</th>
+                    <th>Referrer</th>
+                    <th>Request Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (data.length > 0) { %>
+                    <% data.forEach(function(row) { %>
+                        <tr>
+                            <td><%= row.user_agent %></td>
+                            <td><%= row.referrer %></td>
+                            <td><%= row.request_count %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No data found for the selected filters.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <% for(let i=1; i <=totalPages; i++) { %>
+                <a href="/SuspiciousReferrersforBots?custom_url=<%= custom_url %>&start_date=<%= start_date %>&end_date=<%= end_date %>&page=<%= i %>" 
+                   class="<%= currentPage === i ? ' active' : '' %>">
+                   <%= i %>
+                </a>
+            <% } %>
+        </div>
+        
+    </div>
+</body>
+
+</html>

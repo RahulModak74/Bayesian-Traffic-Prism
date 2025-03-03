@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Summary</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .refresh-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        .refresh-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="refresh-btn" onclick="loadContent('/session_summary', this)">Refresh Data</button>
+
+        <% if (data.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Session ID</th>
+                        <th>Browser ID</th>
+                        <th>Last Seen</th>
+                        <th>Session Start</th>
+                        <th>Hits</th>
+                        <th>Came From</th>
+                        <th>Current URL</th>
+                        <th>IP Address</th>
+                        <th>Session Duration (s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(function(row) { %>
+                        <tr>
+                            <td><a href="#" onclick="loadContent('/session_journey?session_id=<%= row.session_id %>', this)"><%= row.session_id %></a></td>
+                            <td><%= row.browser_id %></td>
+                            <td><%= new Date(row.last_seen).toLocaleString() %></td>
+                            <td><%= new Date(row.session_start).toLocaleString() %></td>
+                            <td><%= row.hits %></td>
+                            <td><%= row.came_from || 'N/A' %></td>
+                            <td><%= row.current_url || 'N/A' %></td>
+                            <td><%= row.ip_address || 'N/A' %></td>
+                            <td><%= row.session_duration %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No session data available.</p>
+        <% } %>
+
+        <div class="pagination">
+            <% for (let i = 1; i <= totalPages; i++) { %>
+                <a onclick="loadContent('/session_summary?page=<%= i %>', this)" class="<%= currentPage === i ? 'active' : '' %>">
+                    <%= i %>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

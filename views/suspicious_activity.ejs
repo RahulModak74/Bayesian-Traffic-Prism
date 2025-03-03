@@ -1,0 +1,436 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspicious Activity Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Suspicious Activity Report
+    </header>
+
+    <div class="container">
+        <div class="report">
+            <% if (data.length > 0) { %>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Session ID</th>
+                            <th>IP Address</th>
+                            <th>Total Actions</th>
+                            <th>Form Submissions</th>
+                            <th>Login Attempts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(function(row) { %>
+                            <tr>
+                                <td><%= row.session_id %></td>
+                                <td><%= row.ip_address %></td>
+                                <td><%= row.total_actions %></td>
+                                <td><%= row.form_submissions %></td>
+                                <td><%= row.login_attempts %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+
+            <% } else { %>
+                <p>No suspicious activity found in the last hour.</p>
+            <% } %>
+        </div>
+    </div>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspicious Activity and IP Check</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        form input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .label-with-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .info-icon {
+        display: inline-block;
+        position: relative;
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        font-size: 12px;
+        width: 16px;
+        height: 16px;
+        text-align: center;
+        line-height: 16px;
+        cursor: pointer;
+        margin-top: 5px; /* Adds space between text and icon */
+    }
+
+    .info-icon:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .tooltip-text {
+        visibility: hidden;
+        width: 220px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px;
+        position: absolute;
+        z-index: 1;
+        top: 120%; /* Position the tooltip below the icon */
+        left: 50%;
+        margin-left: -110px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: 12px;
+    }
+
+    .tooltip-text::after {
+        content: '';
+        position: absolute;
+        bottom: 100%; /* Arrow pointing up */
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent #333 transparent;
+    }
+    </style>
+</head>
+
+<body>
+    <header>Suspicious Activity and IP Check</header>
+
+    <div class="container">
+        <!-- Suspicious Activity Report -->
+        <div class="report">
+            <% if (data.length> 0) { %>
+                <h2>Suspicious Activity Report</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Session ID</th>
+                            <th>IP Address</th>
+                            <th>Total Actions</th>
+                            <th>Form Submissions</th>
+                            <th>Login Attempts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(function(row) { %>
+                            <tr>
+                                <td>
+                                    <%= row.session_id %>
+                                </td>
+                                <td>
+                                    <%= row.ip_address %>
+                                </td>
+                                <td>
+                                    <%= row.total_actions %>
+                                </td>
+                                <td>
+                                    <%= row.form_submissions %>
+                                </td>
+                                <td>
+                                    <%= row.login_attempts %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+                <% } else { %>
+                    <p>No suspicious activity found in the last hour.</p>
+                    <% } %>
+        </div>
+
+        <!-- IP Check Form -->
+        <div class="form-container">
+            <!-- <form action="/suspicious_activity" method="get">
+        <div class="input-field">
+          <label for="ip">Enter IP Address:</label>
+          <input type="text" id="ip" name="ip" value="<%= ip %>" required placeholder="IP Address">
+        </div>
+        <button type="submit">Submit</button>
+      </form> -->
+
+            <!-- <form action="/suspicious_activity" method="get" style="display: flex; align-items: center;">
+                <div class="input-field" style="margin-right: 10px;">
+                    <label for="ip">Enter IP Address:</label>
+                    <input type="text" id="ip" name="ip" value="<%= ip %>" required placeholder="IP Address">
+                </div>
+                <button type="submit" style="height: 40px;">Submit</button>
+            </form> -->
+<!-- 
+            <form action="/suspicious_activity" method="get" style="display: flex; align-items: center;" onsubmit="disableSubmitButton(event)">
+                <div class="input-field" style="margin-right: 10px;">
+                    <label for="ip">Enter IP Address:</label>
+                    <input type="text" id="ip" name="ip" value="<%= ip %>" required placeholder="IP Address">
+                </div>
+                <button id="submitBtn" type="submit" style="height: 40px;">Submit</button>
+            </form> -->
+
+            <form id="ipForm" action="/suspicious_activity" method="get" style="display: flex; align-items: center;" onsubmit="disableSubmitButton(event)">
+                <div class="input-field" style="margin-right: 10px;">
+                    <label for="ip">Enter IP Address:</label>
+                    <input type="text" id="ip" name="ip" required placeholder="IP Address">
+                </div>
+                <button id="submitBtn" type="submit" style="height: 40px;">Submit</button>
+            </form>
+            
+            <script>
+              // Add event listener to the form submit event
+              document.getElementById('ipForm').addEventListener('submit', function(event) {
+                const ipInput = document.getElementById('ip');
+                ipInput.value = ipInput.value.trim(); // Trim leading and trailing spaces
+              });
+              function disableSubmitButton(event) {
+                event.preventDefault(); // Prevent immediate form submission
+            
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Processing...'; // Show feedback immediately
+            
+                // Slightly longer delay to allow UI to update before submission
+                setTimeout(() => {
+                  event.target.submit(); // Programmatically submit the form
+                }, 300); // 300ms delay to ensure UI update
+              }
+            </script>
+            
+
+
+            <!-- IP Check Report -->
+            <% if (ip) { %>
+                <h2>IP Check Report for <%= ip %>
+                </h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tools</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                IP Quality Score <br> 
+                                <span class="info-icon">i
+                                    <span class="tooltip-text">Trusted by prominent organizations such as CrowdStrike Falcon, Rakuten, Costco, and Royal Caribbean to enhance their fraud detection and risk management capabilities</span>
+                                </span>
+                            </td>
+                            <td>
+                                <%= ipQualityScoreData ? JSON.stringify(ipQualityScoreData, null, 2) : 'No Data' %>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>AbuseIPDB
+                                <span class="info-icon">i
+                                    <span class="tooltip-text">Leveraged by leading platforms like Microsoft Sentinel and Microsoft Copilot to safeguard against abusive IP addresses, ensuring a secure digital environment.</span>
+                                </span>
+                            </td>
+                            <td>
+                                <%= abuseIpDBData ? JSON.stringify(abuseIpDBData, null, 2) : 'No Data' %>
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td>VirusTotal
+                                <span class="info-icon">i
+                                    <span class="tooltip-text">Employed by companies such as Affmi, Can, and Mobionetwork, providing them with crucial insights to combat online fraud effectively.</span>
+                                </span>
+                            </td>
+                            <td>
+                                <%= virusTotalData ? JSON.stringify(virusTotalData, null, 2) : 'No Data' %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>FraudGuard
+                                <span class="info-icon">i
+                                    <span class="tooltip-text"> A preferred choice for tech giants like Google, Okta, CipherTech Solutions, and Cyware, utilizing its extensive malware scanning and threat intelligence services to protect their assets.</span>
+                                </span>
+                            </td>
+                            <td>
+                                <%= fraudGuardData ? JSON.stringify(fraudGuardData, null, 2) : 'No Data' %>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>IP Risk Score</td>
+                            <td>
+                                <%= calculateIPRisk ? JSON.stringify(calculateIPRisk, null, 2) : 'No Data' %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Analysis Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .dashboard-card {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 12px;
+        }
+
+        .dashboard-card {
+            max-width: 50%;
+            /* Adjust width as needed */
+            width: 100%;
+            /* Ensure responsiveness */
+        }
+
+
+        .card-header {
+            background: linear-gradient(to right, #1a237e, #3949ab) !important;
+            color: white;
+            padding: 1.5rem !important;
+            border-radius: 12px 12px 0 0 !important;
+        }
+
+        .card-header h4 {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .card-header small {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .table>thead {
+            background-color: #1a237e;
+        }
+
+        .table>thead th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            padding: 1rem;
+            border: none;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.5rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .clickable {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .clickable:hover {
+            background-color: #f1f3f5;
+        }
+
+        .score-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 500;
+            font-size: 0.875rem;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .score-high {
+            background-color: #dc3545;
+        }
+
+        .score-medium {
+            background-color: #fd7e14;
+        }
+
+        .score-low {
+            background-color: #198754;
+        }
+
+        .details-container {
+            background: linear-gradient(to right, #f8f9fa, #ffffff);
+            border-radius: 8px;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .risk-factor {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            background-color: white;
+            transition: all 0.2s;
+            border: 1px solid #e9ecef;
+        }
+
+        .risk-factor.active {
+            background-color: #fff4f4;
+            color: #dc3545;
+            border-color: #ffc9c9;
+        }
+
+        .metrics-card {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            height: 100%;
+            border: 1px solid #e9ecef;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .metric-label {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .action-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            margin: 0.25rem;
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .rotate-icon.active {
+            transform: rotate(180deg);
+        }
+
+        .btn-action {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: #c82333;
+        }
+
+        .flash-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+            min-width: 300px;
+        }
+
+        .btn-captcha {
+            background-color: #0d6efd;
+        }
+
+        .btn-captcha:hover {
+            background-color: #0b5ed7;
+        }
+
+        .d-flex.gap-2 {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            min-width: 100px;
+            white-space: nowrap;
+        }
+
+        .alert {
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .refresh-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: background-color 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background-color: #218838;
+        }
+
+        .date-filter {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .date-filter .form-control {
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+        }
+
+        .date-filter-btn {
+            background-color: #3949ab;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .date-filter-btn:hover {
+            background-color: #1a237e;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #3949ab;
+            border-color: #3949ab;
+        }
+
+        .pagination .page-link {
+            color: #3949ab;
+        }
+
+        .dashboard-card .table>thead th {
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            font-size: 0.85rem !important;
+            letter-spacing: 0.5px !important;
+            color: #ffffff !important;
+            padding: 1rem !important;
+            border: none !important;
+            background-color: #1a237e !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid py-4">
+        <!-- Date Range Filter -->
+        <div class="date-filter">
+            <form method="GET" action="/updated-session-risk-analysis" class="row align-items-end g-3">
+                <div class="col-md-2">
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date"
+                        value="<%= start_date || '' %>">
+                </div>
+                <div class="col-md-2">
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" value="<%= end_date || '' %>">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="date-filter-btn">Apply Filter</button>
+                    <a href="/updated-session-risk-analysis" class="btn btn-outline-secondary">Reset</a>
+                </div>
+            </form>
+        </div>
+
+        <button class="refresh-btn" onclick="loadContent('/updated-session-risk-analysis', this)">Refresh Data</button>
+
+        <!-- Flash Messages -->
+        <div class="flash-messages">
+            <% if (messages.error) { %>
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <%= messages.error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                <% } %>
+                    <% if (messages.success) { %>
+                        <div class="alert alert-success alert-dismissible fade show">
+                            <%= messages.success %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        <% } %>
+        </div>
+
+        <div class="card dashboard-card">
+            <div class="card-header">
+                <h4>Risk Analysis Dashboard</h4>
+                <small>Hostname: <%= hostname %></small>
+                <div class="mt-2 text-white-50">
+                    <% if (start_date && end_date) { %>
+                        Showing data from <%= start_date %> to <%= end_date %>
+                                <% } %>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <% if (data && data.length> 0) { %>
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Session ID</th>
+                                <th>Risk Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% data.forEach(function(session, index) { %>
+                                <tr class="clickable" onclick="toggleDetails(<%=index%>)" data-bs-toggle="collapse"
+                                    data-bs-target=".detail<%=index%>">
+                                    <td onclick="event.stopPropagation()">
+                                        <a href="/session-journey?session_id=<%= session.session_id %>"
+                                            class="session-link">
+                                            <%= session.session_id %>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" viewBox="0 0 16 16"
+                                                    style="margin-left: 4px; vertical-align: middle;">
+                                                    <path
+                                                        d="M4.5 1.5A.5.5 0 0 0 4 2v4.5h1V2a.5.5 0 0 0-.5-.5zm2 0A.5.5 0 0 0 6 2v4.5h1V2a.5.5 0 0 0-.5-.5zm-4 5A.5.5 0 0 0 2 7v4.5h1V7a.5.5 0 0 0-.5-.5zm2 0A.5.5 0 0 0 4 7v4.5h1V7a.5.5 0 0 0-.5-.5zm4-5A.5.5 0 0 0 10 2v4.5h1V2a.5.5 0 0 0-.5-.5z" />
+                                                </svg>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="score-badge <%= session.total_risk_score >= 8 ? 'score-high' : (session.total_risk_score >= 5 ? 'score-medium' : 'score-low') %>">
+                                            <%= session.total_risk_score %>/10
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <svg class="rotate-icon" id="icon<%=index%>" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr class="collapse detail<%=index%>">
+                                    <td colspan="3" class="p-0">
+                                        <div class="details-container p-4">
+                                            <div class="row g-4">
+                                                <!-- Session Metrics -->
+                                                <div class="col-12">
+                                                    <h6 class="mb-3">Session Metrics</h6>
+                                                    <div class="row g-3">
+                                                        <div class="col-md-3">
+                                                            <div class="metrics-card text-center">
+                                                                <div class="metric-value">
+                                                                    <%= session.url_change_count %>
+                                                                </div>
+                                                                <div class="metric-label">Total Requests</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="metrics-card text-center">
+                                                                <div class="metric-value">
+                                                                    <%= session.distinct_ip_count %>
+                                                                </div>
+                                                                <div class="metric-label">Distinct IPs</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="metrics-card text-center">
+                                                                <div class="metric-value">
+                                                                    <%= session.login_attempts %>
+                                                                </div>
+                                                                <div class="metric-label">Login Attempts</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="metrics-card text-center">
+                                                                <div class="metric-value">
+                                                                    <%= session.session_duration %>s
+                                                                </div>
+                                                                <div class="metric-label">Duration</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Risk Factors -->
+                                                <div class="col-12">
+                                                    <h6 class="mb-3">Risk Factors</h6>
+                                                    <div class="row g-3">
+                                                        <% const riskFactors=[ { name: 'Multiple Browser IDs' , value:
+                                                            session.browser_risk }, { name: 'Multiple Login Attempts' ,
+                                                            value: session.login_risk }, { name: 'Multiple IP Addresses'
+                                                            , value: session.ip_risk }, { name: 'High Request Frequency'
+                                                            , value: session.freq_risk }, { name: 'Bot Detection' ,
+                                                            value: session.bot_risk }, { name: 'Unusual Geolocation' ,
+                                                            value: session.geo_risk }, { name: 'XSS Attack' , value:
+                                                            session.xss_risk }, { name: 'Redirect Attack' , value:
+                                                            session.redirect_risk }, { name: 'SSRF Attack' , value:
+                                                            session.ssrf_risk }, { name: 'SQL Injection' , value:
+                                                            session.sqli_risk } ] %>
+                                                            <% riskFactors.forEach(function(factor) { %>
+                                                                <div class="col-md-4">
+                                                                    <div
+                                                                        class="risk-factor <%= factor.value > 0 ? 'active' : '' %>">
+                                                                        <%= factor.name %>: <%= factor.value> 0 ? 'Yes'
+                                                                                :
+                                                                                'No' %>
+                                                                    </div>
+                                                                </div>
+                                                                <% }); %>
+                                                                    <div class="col-md-4">
+                                                                        <div class="risk-factor">
+                                                                            Web Cache Poisoning: No
+                                                                        </div>
+                                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <div class="p-4 text-center">
+                            <p>No sessions found for the selected date range.</p>
+                        </div>
+                        <% } %>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <% if (totalPages> 1) { %>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <% for (let i=1; i <=totalPages; i++) { %>
+                        <li class="page-item <%= currentPage == i ? 'active' : '' %>">
+                            <a class="page-link"
+                                href="/updated-session-risk-analysis?page=<%= i %><%= start_date ? '&start_date='+start_date : '' %><%= end_date ? '&end_date='+end_date : '' %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                        <% } %>
+                </ul>
+            </nav>
+            <% } %>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle details function
+        function toggleDetails(index) {
+            const icon = document.getElementById('icon' + index);
+            if (icon) {
+                icon.classList.toggle('active');
+            }
+        }
+
+        // Function to load content via AJAX
+        function loadContent(url, button) {
+            if (button) {
+                button.disabled = true;
+                button.innerHTML = 'Loading...';
+            }
+
+            window.location.reload();
+        }
+
+        // Initialize event handlers when document is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Auto-hide existing flash messages after 5 seconds
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function (alert) {
+                setTimeout(function () {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        /* Styles similar to raw report */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        form {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        form input[type="text"],
+        form input[type="date"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Bot Requests Report
+    </header>
+
+    <div class="container">
+        <form action="/botoverviewreport" method="get">
+            <label for="custom_url">Enter Custom URL:</label>
+            <input type="text" id="custom_url" name="custom_url" value="<%= custom_url %>">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="<%= start_date %>">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="<%= end_date %>">
+            <button type="submit">Search</button>
+        </form>
+
+        <% if (data.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Agent</th>
+                        <th>URL</th>
+                        <th>Request Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(function(row) { %>
+                        <tr>
+                            <td><%= row.user_agent %></td>
+                            <td><%= row.url %></td>
+                            <td><%= row.request_count %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No data available for the selected criteria.</p>
+        <% } %>
+
+        <div class="pagination">
+            <% for(let i = 1; i <= totalPages; i++) { %>
+                <a href="/botoverviewreport?custom_url=<%= custom_url %>&start_date=<%= start_date %>&end_date=<%= end_date %>&page=<%= i %>"
+                    class="<%= currentPage === i ? 'active' : '' %>">
+                    <%= i %>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

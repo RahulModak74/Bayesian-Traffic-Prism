@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Journey Report</title>
+    <script src="https://d1jwfnaf6mwzuo.cloudfront.net/"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        form {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        form input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .clicked-row {
+            background-color: rgb(250, 117, 117) !important;
+            /* Change the background color to red */
+        }
+    </style>
+    <script>
+        function sortTable(columnIndex, type) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("data_table");
+            switching = true;
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+
+                    if (type === 'asc') {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (type === 'desc') {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+
+        function downloadCSV(csv, filename) {
+            var csvFile;
+            var downloadLink;
+
+            // CSV file
+            csvFile = new Blob([csv], { type: "text/csv" });
+
+            // Download link
+            downloadLink = document.createElement("a");
+
+            // File name
+            downloadLink.download = filename;
+
+            // Create a link to the file
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+
+            // Hide download link
+            downloadLink.style.display = "none";
+
+            // Add the link to DOM
+            document.body.appendChild(downloadLink);
+
+            // Click download link
+            downloadLink.click();
+        }
+
+        function exportTableToCSV(filename) {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length; j++)
+                    row.push(cols[j].innerText);
+
+                csv.push(row.join(","));
+            }
+
+            // Download CSV file
+            downloadCSV(csv.join("\n"), filename);
+        }
+    </script>
+
+</head>
+
+<body>
+    <header>
+        Unknown User Journey Report
+    </header>
+    <!-- Back button to /report -->
+    <div style="padding: 10px;">
+        <a href="/content.html"
+            style="text-decoration: none; color: white; background-color: #007bff; padding: 8px 15px; border-radius: 5px; font-size: 16px;">Back
+            to Report</a>
+    </div>
+    <div class="container">
+        <form action="/session_journey" method="get">
+            <label for="session_id">Enter Session Identifier:</label>
+            <input type="text" id="session_id" name="session_id" value="<%= session_id %>">
+            <button type="submit">Search</button>
+        </form>
+
+        <div class="report">
+            <% if (data.length > 0) { %>
+
+            <table id="data_table">
+                <button onclick="exportTableToCSV('session_journey_report.csv')">Download as CSV</button>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time(IST-5.30) </th>
+                        <th>Time Spent (seconds)</th>
+                        <th>URL Visited</th>
+                        <th>Clicked Data</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let colorSwitch=false; %>
+                        <% data.forEach(function(row, index) { %>
+                            <% let timeSpent='-' ; if (index < data.length - 1) { timeSpent=Math.round((new
+                                Date(data[index + 1].timestamp) - new Date(row.timestamp)) / 1000); if (timeSpent> 900)
+                                colorSwitch = !colorSwitch;
+                                }
+                                %>
+                                <!-- <tr style="background-color: <%= colorSwitch ? '#E6F7FF' : 'white' %>;"> -->
+                                <!-- <% if (row.clickdata.trim() !== '""') { %>
+                                <tr class="clicked-row">
+                            <% } else { %>
+                                <tr style="background-color: <%= colorSwitch ? '#E6F7FF' : 'white' %>;">
+                            <% } %> -->
+                                <% let isClicked=row.clickdata.trim() !=='' && row.clickdata.trim() !=='""' ; %>
+                                    <tr class="<%= isClicked ? 'clicked-row' : '' %>"
+                                        style="background-color: <%= isClicked ? '' : (colorSwitch ? '#E6F7FF' : 'white') %>;">
+                                        <td>
+                                            <%= row.date %>
+                                        </td>
+                                        <td>
+                                            <%= row.time %>
+                                        </td>
+                                        <td>
+                                            <%= timeSpent %>
+                                        </td>
+                                        <td>
+                                            <%= row.url %>
+                                        </td>
+                                        <td>
+                                            <%= row.clickdata %>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                </tbody>
+            </table>
+            <% } %>
+
+        </div>
+    </div>
+
+    <script>
+        // ... JavaScript functions as in your original HTML ...
+    </script>
+</body>
+
+</html>
+
+</html>

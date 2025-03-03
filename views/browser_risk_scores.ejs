@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Activity Scores</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        form {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        form input[type="date"] {
+            padding: 10px;
+            width: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .score-cell {
+            text-align: center;
+        }
+
+        .platforms-cell {
+            max-height: 100px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+            margin: 0 2px;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Browser Activity Scores
+    </header>
+
+    <div class="container">
+        <!-- Search Form -->
+        <form action="/browser_risk_scores" method="get">
+            <input type="date" id="start_date" name="start_date" value="<%= start_date %>">
+            <input type="date" id="end_date" name="end_date" value="<%= end_date %>">
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Table Container -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Browser ID</th>
+                        <th>Risk Score</th>
+                        <th>Bot Activity</th>
+                        <th>Request Pattern</th>
+                        <th>Platform Mismatch</th>
+                        <th>Auth Attempts</th>
+                        <th>Error Pattern</th>
+                        <th>API Usage</th>
+                        <th>Admin Access</th>
+                        <th>Session Pattern</th>
+                        <th>Total Requests</th>
+                        <th>Requests/Hour</th>
+                        <th>Bot Requests</th>
+                        <th>Bot Ratio</th>
+                        <th>Auth Attempts</th>
+                        <th>Error Rate</th>
+                        <th>Unique IPs</th>
+                        <th>API Requests</th>
+                        <th>Recommended Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% results.forEach(function(result) { %>
+                        <tr>
+                            <td title="<%= result['Browser ID'] %>"><%= result['Browser ID'] %></td>
+                            <td class="score-cell"><%= result['Risk Score'] %></td>
+                            <td class="score-cell"><%= result['Bot Activity Score'] %></td>
+                            <td class="score-cell"><%= result['Request Pattern Score'] %></td>
+                            <td class="score-cell"><%= result['Platform Mismatch Score'] %></td>
+                            <td class="score-cell"><%= result['Auth Attempts Score'] %></td>
+                            <td class="score-cell"><%= result['Error Pattern Score'] %></td>
+                            <td class="score-cell"><%= result['API Usage Score'] %></td>
+                            <td class="score-cell"><%= result['Admin Access Score'] %></td>
+                            <td class="score-cell"><%= result['Session Pattern Score'] %></td>
+                            <td class="score-cell"><%= result['Total Requests'] %></td>
+                            <td class="score-cell"><%= result['Requests/Hour'] %></td>
+                            <td class="score-cell"><%= result['Bot Requests'] %></td>
+                            <td class="score-cell"><%= (result['Bot Ratio'] * 100).toFixed(1) %>%</td>
+                            <td class="score-cell"><%= result['Auth Attempts'] %></td>
+                            <td class="score-cell"><%= (result['Error Rate'] * 100).toFixed(1) %>%</td>
+                            <td class="score-cell"><%= result['Unique IPs'] %></td>
+                            <td class="score-cell"><%= result['API Requests'] %></td>
+                            <td><%= result['Recommended Action'] %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <% for(let i = 1; i <= totalPages; i++) { %>
+                <a href="/browser_risk_scores?start_date=<%= start_date %>&end_date=<%= end_date %>&page=<%= i %>"
+                   class="<%= currentPage === i ? 'active' : '' %>">
+                    <%= i %>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>
