@@ -25,17 +25,17 @@
 
 7. **Benchmark for Evaluation**: Traffic-Prism provides an open-source benchmark to evaluate what additional features commercial WAFs offer, enabling cost-benefit analysis even if you ultimately choose commercial options.
 
-## Advanced Capabilities
+## Gen AI consulting services: We provide consulting services how to fine tune Traffic Prism
 
 8. **Zero-Day Attack Detection**: LLM-based model integration offers exceptional potential for detecting zero-day vulnerabilities. Local custom models with Ollama or specialized trained models can handle emerging risks before signatures are available.
 
 9. **Custom Risk Modeling**: Further risk customization is possible through PyMC3-based Bayesian models tailored to your specific environment and threat landscape.
 
-10. **Advanced Attack Protection**: For high-risk installations like financial services, we offer consulting/training on handling sophisticated threats such as LDAP injections, header-based complex attack chains, and polyglot attacks.
+10. **Advanced Attack Protection**: For high-risk installations like financial services, handling sophisticated threats such as LDAP injections, header-based complex attack chains, and polyglot attacks.
 
 ## Data Sovereignty & Compliance
 
-11. **Complete Data Control**: All security data stays within your infrastructure, making Traffic-Prism ideal for ISO 27001, SOC 2, and GDPR compliance.
+11. **Complete Data Control**: All security data stays within your infrastructure, making Traffic-Prism ideal for ISO 27001, SOC 2, and GDPR compliance. We ourselves are certified.
 
 ## Implementation Services
 
