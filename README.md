@@ -13,20 +13,31 @@ Our ultimate goal is to become the "Hugging Face of Cybersecurity" —a global, 
 Traffic-Prism is an adaptive, AI-powered web application firewall (WAF) designed to complement existing WAFs like Nginx firewall, ModSecurity and DDoS FastNetMon. It provides advanced features such as:
 
 DOM-Based Attack Detection: Protects against modern client-side vulnerabilities like DOM XSS, DOM SQLi, and Clickjacking.
+
 Session Intelligence: Monitors user sessions in real-time, calculating risk scores to identify and terminate risky sessions automatically.
+
 Bayesian Risk Inference (Optional-Consulting): Combines historical pattern analysis with Gen AI-based scoring to detect zero-day attacks and sophisticated threats.
+
 Bot Detection: Identifies and mitigates sophisticated bots and automated browser attacks using Playwright/Selenium.
+
 🔒 Security Considerations
 Traffic-Prism is designed to enhance web security but cannot guarantee protection against all threats.
+
 Security is a layered approach; Traffic-Prism should be one component of your overall security strategy.
+
 Regular security audits and updates to your entire infrastructure are still necessary.
+
 Users are responsible for proper configuration and implementation within their environments.
+
 📜 License
 Traffic-Prism is licensed under dual license - Server Side Public License (SSPL) and Commercial one. SSPL license ensures that:
 
 Anyone can use, modify, and distribute the software freely.
+
 If you offer Traffic-Prism as a service (e.g., SaaS), you must also open-source your entire stack under the SSPL.
+
 This protects the platform from being used without contributing back to the community.
+
 For more details, see the LICENSE file. For end users there is no impact and they can freely use this software for their internal defenses.
 
 Even if you are a hosted website like WordPress you can still host and avail this platform to track bots and prevent DOM XSS attacks.
@@ -40,9 +51,23 @@ Alternative licensing terms
 Enterprise features
 Please contact us at pbi@bayesiananalytics.in to discuss commercial licensing options
 
-We cover basic XSS / DOM XSS attacks in this code base. There are advanced XSS attacks/LDAP attacks that typically are experiecned by high risk websites such as banks. But to counter them we need to track lot more data points like XSS headers which may impact performance. So they need to be carefully considered and implemented in enteprise environment. We offer consulting services/ training on how it can be implemented.
+We cover basic XSS / DOM XSS attacks in this code base. 
 
-Gen AI and LLM provide extra scoring engine that is highly effective against zero day vulnerabilities. Our software mainly risk-analysis.ejs has the placeholder to either include API or your custom model and directly get Gen AI risk scores. However owing to extreme dynamic nature and frequent changes (DeepSeek was recent such event) we have left it to end users to implement their Gen AI model. We will be happy to provide consultancy/training on how exactly such models can be trained. We highly recommened unsloth.ai for training your custom models.
+There are advanced XSS attacks/LDAP attacks that typically are experiecned by high risk websites such as banks.
+
+But to counter them we need to track lot more data points like XSS headers which may impact performance.
+
+So they need to be carefully considered and implemented in enteprise environment. 
+
+We offer consulting services/ training on how it can be implemented.
+
+Gen AI and LLM provide extra scoring engine that is highly effective against zero day vulnerabilities. 
+
+Our software mainly risk-analysis.ejs has the placeholder to either include API or your custom model and directly get Gen AI risk scores. 
+
+However owing to extreme dynamic nature and frequent changes (DeepSeek was recent such event) we have left it to end users to implement their Gen AI model.
+
+We will be happy to provide consultancy/training on how exactly such models can be trained. We highly recommened unsloth.ai for training your custom models.
 
 Professional Consulting: To develop custom modules, Gen AI integration, PowerBI based advance reporting or for training / production support pl get in touch pbi@bayesiananalytics.in
 
