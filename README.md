@@ -9,6 +9,12 @@ At Bayesian Traffic-Prism our vision is quality cybersecurity should be free. Ou
 
 Our ultimate goal is to become the "Hugging Face of Cybersecurity" —a global, community-driven initiative that fosters collaboration, innovation, and trust in the fight against cybercrime.
 
+How to Install:
+
+Please see Installation.md for detailed instructions. Docker instance for quick installation is planned. 
+
+For professional installations and setting up of advanced rules and other features, you may want to consider our consulting/training offerings. Pl get in touch pbi@bayesiananalytics.in
+
 🚀 What is Traffic-Prism?
 Traffic-Prism is an adaptive, AI-powered web application firewall (WAF) designed to complement existing WAFs like Nginx firewall, ModSecurity and DDoS FastNetMon. It provides advanced features such as:
 
