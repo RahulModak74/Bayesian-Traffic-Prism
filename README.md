@@ -82,6 +82,4 @@ If you find Traffic-Prism valuable, consider supporting us:
 Star the Repository: Show your appreciation by starring this repo once it's live on GitHub.
 Partner: Collaborate with us to enhance the ecosystem.
 Thank you for being part of the Traffic-Prism journey. Together, we can make the internet safer for everyone! 
-(DEMO link: https://youtu.be/yvqCLUvt_vM?si=3tNy8ynlxhxN-SJJ)
-
-(DEMO link: https://youtu.be/yvqCLUvt_vM?si=3tNy8ynlxhxN-SJJ)🌐🔒
+🌐🔒
