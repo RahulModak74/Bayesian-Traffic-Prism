@@ -1,25 +1,50 @@
-1. Bayesian Cybersecurity provides innovative approach to websecuirty by adding OLAP layer.
-   
-2. We have lot of open  source and closed source firewalls. All of them look at web traffic as an isolated url request. Some try to do ML and predictive analytics on them to figure out if it could be bot etc.
-   
-3a. In contrast, this software stores all journeys in real time in clickhouse which is superfast OLAP. And then runs set of  rules on the OLAP session to figure out if it could be bot. E.g. is more than 5 request ursl/sec or more than 25 requests per sec. So behaviour based evidence based detection. 
+# Traffic-Prism: Revolutionizing Web Security with Behavioral Analytics
 
-3b. Even for xss and sqli attacks that slip thru WAF, it does a  rule based analysis of the journeys and assigns scores and decides risks and flag. Also it stores all the data (persistance) for future IOC analysis or journey tracking. So compelx attack chains can not only be blocked but tracked too.  
+## Core Innovation
 
-4.In addition it provides a two way pixel where you can set  rules to kill the offending risky sessions in < 300 ms typically thus providing you with real time bot tracking/ XSS tracking and DOM side attack detection and termination that no WAF can provide since they are not designed for client side or behaviour based detections.
+1. **OLAP-Enhanced Security**: Bayesian Traffic-Prism provides a revolutionary approach to web security by adding an OLAP (Online Analytical Processing) layer to traditional security stacks.
 
-5. At conceptual level a static rule WAF like NAXSI (or nginx) or ModSecurity plus TrafficPrism and FastNetMon for DDoS can provide almost all points of commercial WAF and many more since evidence based protection is not possible with current WAFs.
-   
-6.For zero day attacks LLM based model integration can be a high value add. So you have an opensource benchmark to compare what additional features your commercial WAF is offering and do a cost benefit analysis even if you decide to stick with commerical options.
+2. **Beyond Traditional WAFs**: While existing open and closed-source firewalls analyze web traffic as isolated URL requests, Traffic-Prism captures and analyzes complete user journeys.
 
-7. For low budget enterprises startups etc this combination can potentially offer similar level of protection that hitherto was not possible. Stress testing is recommended for your environment.
-   
-8. Gen AI & LLM provides excellent potential for zero day detection and  local custom models with ollama or trained models can be a perfcet combination for handling such risks.
-   
-9. Further customization of risk is possible through pymc3 based custom bayesian models. (How to  customize risks for your unique situation as a combination of OLAP and Gen AI risk.)
-    
-10.There are some advanced attacks and advanced situations like LDAP injections or header based complex attack chains or polyglots that typically are more relevant to high risk installations like financial services and we offer consulting / training about how those situations can be handled case to case basis. Extra data collection required for it will have some performance impact so its a technical trade off. 
+3. **Real-Time Behavioral Analysis**: Traffic-Prism stores all user journeys in real-time in ClickHouse (a high-performance OLAP database) and applies behavioral rules to detect malicious activity:
+   - Identifies suspicious patterns like 5+ URLs/second or 25+ requests/second from a single session
+   - Provides evidence-based detection rather than relying solely on signatures
+   - Detects DOM-based attacks that traditional WAFs miss entirely
 
-11.Most important value addition is all the internals as well your data stays with you. When we got certified for ISO 27001 and SOC 2 as well GDPR this point was of high relevance as per auditors so hosting your own static firewall plus traffic prism and FastNetMon is 100% data safe approach.
+4. **Complete Attack Chain Visibility**: Even for XSS and SQLi attacks that bypass conventional WAFs, Traffic-Prism:
+   - Performs rule-based analysis of complete journeys
+   - Assigns risk scores to sessions
+   - Stores all data persistently for comprehensive incident investigation
+   - Enables tracking and analysis of complex attack chains
 
-12.Even for opensource version installation and setting rules and geography can be tricky and we offer 1 day- 3 day- 2 weeks one time options for those who may need assistance.
+5. **Real-Time Response Capability**: Traffic-Prism's two-way pixel allows for terminating risky sessions in under 300ms, providing protection against client-side vulnerabilities and behavioral threats that traditional WAFs cannot address.
+
+## Cost-Effective Security Stack
+
+6. **Comprehensive Protection**: A combination of static rule WAF (NAXSI or ModSecurity), Traffic-Prism, and FastNetMon for DDoS can provide protection comparable to commercial WAFs at a fraction of the cost.
+
+7. **Benchmark for Evaluation**: Traffic-Prism provides an open-source benchmark to evaluate what additional features commercial WAFs offer, enabling cost-benefit analysis even if you ultimately choose commercial options.
+
+## Advanced Capabilities
+
+8. **Zero-Day Attack Detection**: LLM-based model integration offers exceptional potential for detecting zero-day vulnerabilities. Local custom models with Ollama or specialized trained models can handle emerging risks before signatures are available.
+
+9. **Custom Risk Modeling**: Further risk customization is possible through PyMC3-based Bayesian models tailored to your specific environment and threat landscape.
+
+10. **Advanced Attack Protection**: For high-risk installations like financial services, we offer consulting/training on handling sophisticated threats such as LDAP injections, header-based complex attack chains, and polyglot attacks.
+
+## Data Sovereignty & Compliance
+
+11. **Complete Data Control**: All security data stays within your infrastructure, making Traffic-Prism ideal for ISO 27001, SOC 2, and GDPR compliance.
+
+## Implementation Services
+
+12. **Deployment Options**: We offer 1-day, 3-day, and 2-week implementation assistance packages for organizations that need help with installation, rule configuration, and geographic settings.
+
+## Architectural Diagram
+
+[Traditional WAF] → [Web Traffic] → [Traffic-Prism OLAP Layer] → [Behavioral Analytics]
+↓
+[Session Termination] ← [Risk Scoring] ← [ClickHouse Database]
+
+This open-source solution democratizes enterprise-grade web security, making advanced protection accessible to organizations of all sizes.
