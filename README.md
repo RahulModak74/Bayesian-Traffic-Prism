@@ -100,7 +100,7 @@ GitHub Discussions: Post questions, share ideas, and connect with other users.
 
 Email: For general inquiries only: pbi@bayesiananalytics.in
 
-Please visit our discord channel.
+Coming soon: Discord channel.
 
 Note: Owing to overwhelming response, kindly expect 3-4 days delays. 
 
