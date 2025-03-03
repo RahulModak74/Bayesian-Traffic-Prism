@@ -75,25 +75,46 @@ Professional Consulting: To develop custom modules, Gen AI integration, PowerBI 
 We welcome contributions from developers, researchers, and cybersecurity professionals worldwide! Here's how you can help:
 
 Report Bugs: Open an issue on GitHub if you encounter any problems.
+
 Submit Features: Fork the repository, implement your feature, and submit a pull request.
+
 Improve Documentation: Help us make the documentation clearer and more comprehensive.
+
 Spread the Word: Share Traffic-Prism with your network and encourage others to contribute.
-Contribution Guidelines
+
+Contribution Guidelines:
+
 Follow the Code of Conduct.
+
 Ensure your code adheres to our coding standards.
+
 Include tests for new features or bug fixes.
+
+Please add separate new endpoints and ejs in respective files with tests.
+
 🌍 Community Resources
+
 Website: Visit us at bayesiananalytics.com for more information.
+
 GitHub Discussions: Post questions, share ideas, and connect with other users.
+
 Email: For general inquiries only: pbi@bayesiananalytics.in
-Note: While we value community engagement, we cannot guarantee responses or ongoing support. This is a community-driven project where users help each other.
+
+Please visit our discord channel.
+
+Note: Owing to overwhelming response, kindly expect 3-4 days delays. 
+
+This is a community-driven project where users help each other.
 
 🏆 Acknowledgments
 We would like to thank the following:
 
 Open-Source Community: For inspiring us to build transparent, community-driven tools.
+
 Early Adopters: For testing and providing feedback during the development phase.
+
 📈 Future Roadmap
+
 Our roadmap includes:
 
 IoT Security: Extending our platform to secure IoT devices like smart meters.
@@ -105,7 +126,7 @@ New Modules: Developing modules for emerging threats (e.g., API security, contai
 Stay tuned for updates!
 
 ❤️ Support Us
-If you find Traffic-Prism valuable, consider supporting us:
+If you find Traffic-Prism valuable:
 
 Star the Repository: Show your appreciation by starring this repo once it's live on GitHub.
 
