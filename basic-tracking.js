@@ -31,7 +31,7 @@
   // Data sending function
   function sendData(data) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://13.234.117.8:8000/track", true);
+    xhr.open("POST", "http://<<IP>>:8000/track", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
   }
