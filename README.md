@@ -1,5 +1,13 @@
 Bayesian Traffic-Prism: Open-Source Web Security for All
 
+Simple Docker based installation:
+
+1. docker pull bayesiancyber/structured-cyber:v1.
+2. docker run -d -p 3000:3000 -p 8124:8123 -p 9001:9000 -p 8001:8000 structured-cyber
+3. Go to localhost:3000 (or IP:3000 if you are installting on cloud IP)
+4. Username/password: bluebot/bluebot123 and you can see details of protection available
+5. Details of enhanced version will be released later for advanced protections like polyglots and DOM-XSS as there is performance penalty.
+
 
 ⚠️ Disclaimer
 Traffic-Prism is provided "as is" without any warranties, express or implied. By using this software, you acknowledge that you are doing so at your own risk. The developers and contributors are not responsible for any damage or liability arising from the use of this software. See LICENSE.txt for complete disclaimer details.
