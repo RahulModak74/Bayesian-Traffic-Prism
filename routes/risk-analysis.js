@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
       (COUNT(CASE WHEN t.user_agent LIKE '%bot%' THEN 1 END) > 0) * 2 AS bot_risk,
       (uniqExact(concat(rd.country, rd.region, rd.city)) > 1) * 3 AS geo_risk,
       -- New attack detection risks
-      (COUNT(CASE WHEN t.url LIKE '%script%' OR t.url LIKE '%</script>%' THEN 1 END) > 0) * 8 AS xss_risk,
+      (COUNT(CASE WHEN t.url LIKE '%script%' OR t.url LIKE '%</script>%' OR t.url LIKE '%src%' THEN 1 END) > 0) * 8 AS xss_risk,
       (COUNT(CASE WHEN t.url LIKE '%redirect%' OR t.url LIKE '%target=%' THEN 1 END) > 0) * 8 AS redirect_risk,
       (COUNT(CASE WHEN t.url LIKE '%localhost%' OR t.url LIKE '%127.0.0.1%' THEN 1 END) > 0) * 8 AS ssrf_risk,
       (COUNT(CASE WHEN t.url LIKE '% OR %=% OR %' OR t.url LIKE '%1=1%' THEN 1 END) > 0) * 8 AS sqli_risk,
