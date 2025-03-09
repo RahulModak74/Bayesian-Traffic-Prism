@@ -27,17 +27,11 @@ For professional installations and setting up of advanced rules and other featur
 🚀 What is Traffic-Prism?
 Traffic-Prism is an adaptive, AI-powered web application firewall (WAF) designed to complement existing WAFs like Nginx firewall, ModSecurity and DDoS FastNetMon.
 
-There are advanced XSS attacks/LDAP attacks/Polyglots that typically are experienced by high risk websites such as banks. But to counter them we need to track lot more data points like XSS headers which may impact performance. So they need to be carefully considered and implemented in enteprise environment. We offer consulting services/ training on how it can be implemented.
-
 Gen AI and LLM provide extra scoring engine that is highly effective against zero day vulnerabilities. 
 
 Our software component risk-analysis.ejs has the placeholder to either include API or your custom model and directly get Gen AI risk scores. 
 
-However owing to extreme dynamic nature and frequent changes (DeepSeek was recent such event) we have left it to end users to implement their Gen AI model.
-
-We will be happy to provide consultancy/training on how exactly such models can be trained. We highly recommened unsloth.ai for training your custom models.
-
-Professional Consulting: To develop custom modules, Gen AI integration, PowerBI based advance reporting or for training / production support pl get in touch pbi@bayesiananalytics.in
+Professional Consulting: To develop custom modules, advacned attacks like Polyglot, Gen AI integration, reporting or for training / production support pl get in touch pbi@bayesiananalytics.in
 
 🤝 How to Contribute
 We welcome contributions from developers, researchers, and cybersecurity professionals worldwide! Here's how you can help:
