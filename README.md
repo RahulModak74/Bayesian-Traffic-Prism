@@ -16,67 +16,18 @@ Quick Docker based installation:
 Traffic-Prism is provided "as is" without any warranties, express or implied. By using this software, you acknowledge that you are doing so at your own risk. The developers and contributors are not responsible for any damage or liability arising from the use of this software. See LICENSE.txt for complete disclaimer details.
 
 🌟 Vision
-At Bayesian Traffic-Prism our vision is quality cybersecurity should be free. Our mission is to democratize cybersecurity by providing enterprise grade open-source, transparent, and neutral tools that empower individuals, organizations, and governments to defend against evolving web-based threats. We believe that cybersecurity is a shared responsibility, and our platform bridges the gap between traditional WAFs and modern attack vectors like DOM-based XSS, session hijacking, and bot attacks.
-
-Our ultimate goal is to become the "Hugging Face of Cybersecurity" —a global, community-driven initiative that fosters collaboration, innovation, and trust in the fight against cybercrime.
+At Bayesian Traffic-Prism our vision  is to democratize cybersecurity by providing enterprise grade open-source, transparent, and neutral tools that empower individuals, organizations, and governments to defend against evolving web-based threats. 
 
 How to Install:
 
-Please see Installation.md for detailed instructions. Docker instance for quick installation is planned. 
+Pl see DETAILED_DOCUMENTATION.md for compelte details
 
 For professional installations and setting up of advanced rules and other features, you may want to consider our consulting/training offerings. Pl get in touch pbi@bayesiananalytics.in
 
 🚀 What is Traffic-Prism?
-Traffic-Prism is an adaptive, AI-powered web application firewall (WAF) designed to complement existing WAFs like Nginx firewall, ModSecurity and DDoS FastNetMon. It provides advanced features such as:
+Traffic-Prism is an adaptive, AI-powered web application firewall (WAF) designed to complement existing WAFs like Nginx firewall, ModSecurity and DDoS FastNetMon.
 
-DOM-Based Attack Detection: Protects against modern client-side vulnerabilities like DOM XSS, DOM SQLi, and Clickjacking.
-
-Session Intelligence: Monitors user sessions in real-time, calculating risk scores to identify and terminate risky sessions automatically.
-
-Bayesian Risk Inference (Optional-Consulting): Combines historical pattern analysis with Gen AI-based scoring to detect zero-day attacks and sophisticated threats.
-
-Bot Detection: Identifies and mitigates sophisticated bots and automated browser attacks using Playwright/Selenium.
-
-🔒 Security Considerations
-Traffic-Prism is designed to enhance web security but cannot guarantee protection against all threats.
-
-Security is a layered approach; Traffic-Prism should be one component of your overall security strategy.
-
-Regular security audits and updates to your entire infrastructure are still necessary.
-
-Users are responsible for proper configuration and implementation within their environments.
-
-📜 License
-Traffic-Prism is licensed under dual license - Server Side Public License (SSPL) and Commercial one. SSPL license ensures that:
-
-Anyone can use, modify software for internal use.
-
-If you offer Traffic-Prism as a service (e.g., SaaS), you must also open-source your entire stack under the SSPL.
-
-This protects the platform from being used without contributing back to the community.
-
-For more details, see the LICENSE file. For end users there is no impact and they can freely use this software for their internal defenses.
-
-Even if you are a hosted website like WordPress you can still host and avail this platform to track bots and prevent DOM XSS attacks.
-
-📋 Commercial Licensing
-For organizations requiring:
-
-Custom implementations
-Commercial support options
-Alternative licensing terms
-Enterprise features
-Please contact us at pbi@bayesiananalytics.in to discuss commercial licensing options
-
-We cover basic XSS / DOM XSS attacks in this code base. 
-
-There are advanced XSS attacks/LDAP attacks/Polyglots that typically are experienced by high risk websites such as banks.
-
-But to counter them we need to track lot more data points like XSS headers which may impact performance.
-
-So they need to be carefully considered and implemented in enteprise environment. 
-
-We offer consulting services/ training on how it can be implemented.
+There are advanced XSS attacks/LDAP attacks/Polyglots that typically are experienced by high risk websites such as banks. But to counter them we need to track lot more data points like XSS headers which may impact performance. So they need to be carefully considered and implemented in enteprise environment. We offer consulting services/ training on how it can be implemented.
 
 Gen AI and LLM provide extra scoring engine that is highly effective against zero day vulnerabilities. 
 
