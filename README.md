@@ -20,7 +20,7 @@ At Bayesian Traffic-Prism our vision  is to democratize cybersecurity by providi
 
 How to Install:
 
-Pl see DETAILED_DOCUMENTATION.md for compelte details
+Pl see DETAILED_DOCUMENTATION.md for  details
 
 For professional installations and setting up of advanced rules and other features, you may want to consider our consulting/training offerings. Pl get in touch pbi@bayesiananalytics.in
 
