@@ -1,4 +1,4 @@
-Thanks for sharing your GitHub repository and additional context. I'll review the project in-depth and create a detailed `documentation.md` file that includes:
+This file includes
 - Installation and setup guide
 - Code architecture overview
 - API documentation
@@ -9,7 +9,6 @@ Thanks for sharing your GitHub repository and additional context. I'll review th
 - Relevant snapshots from the provided PDF
 - A strong argument on how combining static firewalls (ModSecurity/Naxsi) with Prism matches or exceeds commercial WAF solutions by leveraging session-based scoring and automated bot termination.
 
-I'll get back to you once the documentation is ready.
 
 # Bayesian Traffic-Prism Documentation
 
