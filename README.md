@@ -71,6 +71,8 @@ Email: For general inquiries only: pbi@bayesiananalytics.in
 
 Coming soon: Discord channel.
 
+LinkedIn News Letter: https://www.linkedin.com/newsletters/7259075376058945538/
+
 Note: Owing to overwhelming response, kindly expect 3-4 days delays. 
 
 This is a community-driven project where users help each other.
