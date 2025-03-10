@@ -1,4 +1,4 @@
-# Bayesian Traffic-Prism Enterprise Edition
+# Bayesian Traffic-Prism Enterprise Add On package (Consulting Services)
 
 ## Advanced Web Application Security Beyond Community Edition
 
