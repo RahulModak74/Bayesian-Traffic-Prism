@@ -30,8 +30,7 @@ Pl see DETAILED_DOCUMENTATION.md for  details
 
 For professional installations and setting up of advanced rules and other features, you may want to consider our consulting/training offerings. Pl get in touch pbi@bayesiananalytics.in
 
-🚀 What is Traffic-Prism?
-Traffic-Prism is an adaptive, AI-powered web application firewall (WAF) designed to complement existing WAFs like Nginx firewall, ModSecurity and DDoS FastNetMon.
+Gen AI:
 
 Gen AI and LLM provide extra scoring engine that is highly effective against zero day vulnerabilities. 
 
