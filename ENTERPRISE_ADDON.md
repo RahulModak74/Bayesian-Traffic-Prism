@@ -47,9 +47,7 @@ These AI capabilities bring next-generation threat detection to your environment
 
 The Enterprise Edition includes an advanced tracking pixel with sophisticated browser-side security:
 
-- **Advanced Fingerprinting**: Enterprise-grade device and browser fingerprinting resistant to spoofing
 - **Real-Time DOM Monitoring**: Comprehensive monitoring of DOM mutations for security violations
-- **WebGL Vendor Analysis**: Hardware-level identification to detect headless browsers and automation tools
 - **Security Headers Verification**: Client-side validation of security headers and CSP enforcement
 - **Behavioral Biometrics**: Analysis of mouse movements, typing patterns, and other human behaviors to distinguish bots
 
