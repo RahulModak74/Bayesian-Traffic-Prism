@@ -1,6 +1,6 @@
 Bayesian Traffic-Prism: Open-Source Web Security for All
 
-Bayesian Traffic-Prism is a pixel based WAF add on, to track bots, score sessions, track DOM based advanced attacks, LDAP injections (and potentially terminate them real time).
+Bayesian Traffic-Prism is a pixel based WAF add on, to track  bots, score sessions, track DOM based advanced attacks, LDAP injections (and rule based termination  in real time).
 
 You can use us alongwith any commercial WAF to detect and terminate behavior based bots, clickjacking, cross request patterns, DOM XSS attacks.
 
