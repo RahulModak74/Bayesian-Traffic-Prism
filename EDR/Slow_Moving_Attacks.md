@@ -1,4 +1,4 @@
-Advanced EDR Threat Detection Scenarios
+Advanced EDR Threat Detection Scenarios (That will be difficult for even commercial vendors to identify)
 
 SCENARIO 1: ADVANCED PERSISTENT THREAT (APT) USING LONG-DWELL DELAYED EXECUTION
 
