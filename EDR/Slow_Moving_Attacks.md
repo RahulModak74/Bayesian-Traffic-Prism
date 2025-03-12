@@ -1,5 +1,7 @@
 Advanced EDR Threat Detection Scenarios
+
 SCENARIO 1: ADVANCED PERSISTENT THREAT (APT) USING LONG-DWELL DELAYED EXECUTION
+
 Background: A healthcare organization has been targeted by a sophisticated threat actor. The attacker has planted a dormant implant that remains inactive for an extended period to evade traditional EDR solutions that lack historical telemetry analysis capabilities.
 
 Timeline of Events
@@ -71,6 +73,11 @@ Detection: Data Exfiltration via Steganography
 Timeline: Weekend-only outbound data transfer
 Data Volume: ~2MB per session, 20MB total
 Destination: cdn-analytics[.]com (185.153.196[.]18)
+
+
+
+
+
 SCENARIO 2: CROSS-SYSTEM LATERAL MOVEMENT WITH DISTRIBUTED ATTACK PATTERN
 Background: A financial institution is experiencing a sophisticated attack where no single endpoint shows enough suspicious activity to trigger alerts, but the attacker is moving laterally across multiple systems using legitimate tools and stolen credentials.
 
@@ -148,6 +155,11 @@ Initial Access: FDEV-JT01.financial.local on March 10, 2025
 Final Target: FPAYMENT-PROD01.financial.local on April 3, 2025
 Attack Path: Contractor → Development → Accounting → Admin → Payment Processing
 Attack Duration: 25 days with extremely low activity on any single endpoint
+
+
+
+
+
 SCENARIO 3: POLYMORPHIC FILELESS MALWARE CAMPAIGN WITH BEHAVIORAL EVOLUTION
 Background: A government agency is targeted by a nation-state actor using sophisticated fileless malware that evolves its behavior over time to evade detection. The malware operates entirely in memory, modifies its own code, and adjusts its behavior based on the environment.
 
