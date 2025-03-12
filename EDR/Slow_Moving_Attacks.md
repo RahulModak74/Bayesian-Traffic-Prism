@@ -46,7 +46,7 @@ The system flags modification of a file that remained unchanged for 45 days befo
 Behavioral Pattern Recognition:
 
 The OLAP analysis correlates seemingly unrelated events across a two-month timespan
-Bayesian probability calculations identify the execution chain despite the significant time gaps between stages
+LLM API calls identify the execution chain despite the significant time gaps between stages
 
 
 SIEM Alerts
@@ -262,7 +262,7 @@ Graph analysis connects disparate activities that traditional EDR would view as 
 Behavioral Consistency Despite Technical Changes:
 
 Machine learning models applied to 90-day telemetry identify consistent behavioral patterns despite changing technical implementations
-Bayesian probability calculations flag the consistent underlying attack pattern
+LLM API calls flag the consistent underlying attack pattern
 
 
 
