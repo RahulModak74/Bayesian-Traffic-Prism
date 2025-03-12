@@ -38,6 +38,14 @@ Gen AI and LLM provide extra scoring engine that is highly effective against zer
 
 Our software component risk-analysis.ejs has the placeholder to either include API or your custom model and directly get Gen AI risk scores. 
 
+Poly Swarm:
+
+PolySwarm is a decentralized threat intelligence marketplace built on blockchain technology that aims to transform how cybersecurity threat detection works. 
+
+We have added basic support for Poly Swarm to improve threat detection even further.
+
+Poly Swarm API usage will have associated costs. This is easiest introduction to cybersecurity related blockchain.
+
 Professional Consulting: To develop custom modules, advanced attacks like Polyglot, Gen AI integration, Slow moving attack detection EDR capabilities rivalling or even potentially exceeding leading vendors and  reporting or for training / production support pl get in touch pbi@bayesiananalytics.in
 
 🤝 How to Contribute
