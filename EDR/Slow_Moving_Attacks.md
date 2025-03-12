@@ -32,10 +32,13 @@ Low-and-Slow Network Activity:
 
 Cross-correlation of network telemetry over 60 days reveals a consistent pattern of brief outbound connections
 The system identifies that these connections occur precisely every 24 hours despite varying user activity
+
+
 Memory Pattern Analysis:
 
 Longitudinal RWX segment tracking shows suspicious memory segments in svchost.exe that don't match historical patterns
 Memory mapping comparison across 45+ days identifies injection techniques
+
 Historical File Integrity Verification:
 
 Comparison of file hashes across 60 days reveals the originally dormant DLL has self-modified
@@ -44,7 +47,11 @@ Behavioral Pattern Recognition:
 
 The OLAP analysis correlates seemingly unrelated events across a two-month timespan
 Bayesian probability calculations identify the execution chain despite the significant time gaps between stages
+
+
 SIEM Alerts
+
+
 Alert 1: Long-Term Dwell Time Detection
 
 Severity: Critical
@@ -55,7 +62,13 @@ Timeline: Process remained dormant for 45 days before activation
 Associated File: C:\ProgramData\Microsoft\Windows\SystemData\temp\svchost.dll
 First Seen: March 1, 2024
 First Active: April 15, 2024
+
+
+
 Alert 2: Temporal Networking Anomaly
+
+
+
 
 Severity: High
 Endpoint: HWSTATION-CW22.healthcare.local
@@ -64,7 +77,12 @@ Detection: Consistent Temporal Beaconing
 Timeline: 24-hour precise connection intervals over 15 days
 Destination: cdn-analytics[.]com (185.153.196[.]18)
 Traffic Pattern: Small 15-second bursts every 24 hours
+
+
+
 Alert 3: Weekend Exfiltration Detection
+
+
 
 Severity: Critical
 Endpoint: HWSTATION-CW22.healthcare.local
@@ -117,6 +135,7 @@ Cross-System Command Pattern Recognition:
 
 Bayesian EDR's OLAP analysis correlates similar command patterns across multiple workstations despite being executed by different users
 Statistical behavioral analysis flags the unusual sequence of commands across different machines
+
 Distributed Timeline Analysis:
 
 Longitudinal tracking identifies a clear progression of lateral movement despite low dwell time on individual endpoints
@@ -133,7 +152,11 @@ Multi-stage Threat Construction:
 
 OLAP query correlates seemingly unrelated events across dozens of endpoints
 Graph analysis reveals the attack path despite being distributed across multiple systems
+
+
 SIEM Alerts
+
+
 Alert 1: Distributed Reconnaissance Campaign
 
 Severity: High
@@ -143,16 +166,30 @@ First Detected: March 17, 2024 09:12:34
 Last Detected: March 21, 2024 16:45:22
 Evidence: Similar command patterns executed across multiple systems
 User Accounts: 4 different user accounts executing similar commands
+
+
+
 Alert 2: Service Account Anomaly
 
+
+
+
 Severity: Critical
+
+
 Detection: Abnormal Service Account Usage
 Account: svc_payment_proc@financial.com
 Affected Systems: 5 endpoints + FPAYMENT-PROD01
 Timeline: March 24-April 4, 2024
 Abnormal Behavior: Account used from 5 workstations never previously accessed
                     in 90-day baseline period
+
+
+
+                    
 Alert 3: Cross-System Attack Chain Detected
+
+
 
 Severity: Critical
 Detection: Distributed Attack Chain
@@ -182,6 +219,8 @@ The macro launches a PowerShell script that injects shellcode directly into memo
 No files are written to disk; all operations occur in memory
 The malware establishes persistence through WMI event subscriptions and registry modifications
 Initial C2 communication occurs via DNS TXT records, with minimal traffic
+
+
 Month 2 (March 2024)
 
 The malware begins to modify its own code in memory to evade signature detection
@@ -189,6 +228,9 @@ It changes its network communication patterns every 72 hours
 System scanning occurs only when user activity is detected to blend with legitimate traffic
 The malware migrates between different processes (svchost.exe, explorer.exe, etc.) every few days
 Memory allocation patterns change dynamically based on the host environment
+
+
+
 Month 3 (April 2024)
 
 The malware begins to use legitimate Windows APIs for reconnaissance
@@ -211,6 +253,8 @@ Network Behavior Correlation:
 
 Bayesian analysis of network telemetry across 90 days identifies communication patterns that change in predictable ways
 Statistical correlation of seemingly random connections reveals consistent C2 behavior despite changing protocols and destinations
+
+
 Cross-Process Activity Mapping:
 
 Persistent tracking of system-wide behavior reveals malicious activities distributed across multiple processes
@@ -219,7 +263,13 @@ Behavioral Consistency Despite Technical Changes:
 
 Machine learning models applied to 90-day telemetry identify consistent behavioral patterns despite changing technical implementations
 Bayesian probability calculations flag the consistent underlying attack pattern
+
+
+
 SIEM Alerts
+
+
+
 Alert 1: Memory Manipulation Evolution
 
 Severity: Critical
@@ -229,7 +279,11 @@ First Detected: February 15, 2024
 Latest Detection: April 20, 2024
 Pattern: Memory allocation characteristics that evolve while maintaining operational patterns
 Evidence: 65 days of memory allocation telemetry showing coordinated evolution
+
+
+
 Alert 2: Process Migration Chain
+
 
 Severity: High
 Detection: Systematic Process Migration
@@ -237,6 +291,10 @@ Processes Involved: explorer.exe → svchost.exe → winlogon.exe → spoolsv.ex
 Timeline: February-April 2024
 Behavior: Consistent behavioral patterns despite migration between processes
 Pattern: Predictable migration timing with 72-hour intervals
+
+
+
+
 Alert 3: Multi-Channel Exfiltration Technique
 
 Severity: Critical
@@ -245,3 +303,6 @@ Exfiltration Channels: DNS queries, HTTPS traffic, WebSocket connections
 Timeline: March 5-April 28, 2024
 Data Volume: Estimated 300MB total over distributed channels
 Pattern: Coordinated exfiltration activities distributed across legitimate processes
+
+
+
