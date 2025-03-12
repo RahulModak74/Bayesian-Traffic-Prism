@@ -78,7 +78,13 @@ Destination: cdn-analytics[.]com (185.153.196[.]18)
 
 
 
+
+
+
+
 SCENARIO 2: CROSS-SYSTEM LATERAL MOVEMENT WITH DISTRIBUTED ATTACK PATTERN
+
+
 Background: A financial institution is experiencing a sophisticated attack where no single endpoint shows enough suspicious activity to trigger alerts, but the attacker is moving laterally across multiple systems using legitimate tools and stolen credentials.
 
 Timeline of Events
@@ -160,8 +166,13 @@ Attack Duration: 25 days with extremely low activity on any single endpoint
 
 
 
+
+
 SCENARIO 3: POLYMORPHIC FILELESS MALWARE CAMPAIGN WITH BEHAVIORAL EVOLUTION
-Background: A government agency is targeted by a nation-state actor using sophisticated fileless malware that evolves its behavior over time to evade detection. The malware operates entirely in memory, modifies its own code, and adjusts its behavior based on the environment.
+
+Background: 
+
+A government agency is targeted by a nation-state actor using sophisticated fileless malware that evolves its behavior over time to evade detection. The malware operates entirely in memory, modifies its own code, and adjusts its behavior based on the environment.
 
 Timeline of Events
 Month 1 (February 2025)
