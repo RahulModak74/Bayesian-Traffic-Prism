@@ -5,20 +5,20 @@ SCENARIO 1: ADVANCED PERSISTENT THREAT (APT) USING LONG-DWELL DELAYED EXECUTION
 Background: A healthcare organization has been targeted by a sophisticated threat actor. The attacker has planted a dormant implant that remains inactive for an extended period to evade traditional EDR solutions that lack historical telemetry analysis capabilities.
 
 Timeline of Events
-Day 1 (March 1, 2025)
+Day 1 (March 1, 2024)
 
 A phishing email with a malicious attachment is opened by user (sample name) chris.wong@healthcare.org
 The attachment exploits a zero-day vulnerability in a PDF reader
 A small, encrypted implant is dropped to C:\ProgramData\Microsoft\Windows\SystemData\temp\svchost.dll
 The implant creates a scheduled task configured to only run after 45 days of system uptime
 The malicious DLL has valid digital signatures and mimics a legitimate Windows system file
-Day 45-47 (April 15-17, 2025)
+Day 45-47 (April 15-17, 2024)
 
 After 45 days of system uptime, the scheduled task activates
 The implant runs with low CPU utilization (< 2%) and minimal memory footprint
 It begins scanning internal network resources on non-standard hours (2-4 AM)
 The implant makes one outbound connection every 24 hours for 15 seconds to a legitimate-looking domain
-Day 60 (April 30, 2025)
+Day 60 (April 30, 2024)
 
 The implant begins exfiltrating patient data using steganography techniques
 Data is embedded within legitimate-looking HTTP traffic in small chunks
@@ -53,8 +53,8 @@ Process: svchost.exe (PID: 4588)
 Detection: Delayed Execution Pattern
 Timeline: Process remained dormant for 45 days before activation
 Associated File: C:\ProgramData\Microsoft\Windows\SystemData\temp\svchost.dll
-First Seen: March 1, 2025
-First Active: April 15, 2025
+First Seen: March 1, 2024
+First Active: April 15, 2024
 Alert 2: Temporal Networking Anomaly
 
 Severity: High
@@ -88,13 +88,13 @@ SCENARIO 2: CROSS-SYSTEM LATERAL MOVEMENT WITH DISTRIBUTED ATTACK PATTERN
 Background: A financial institution is experiencing a sophisticated attack where no single endpoint shows enough suspicious activity to trigger alerts, but the attacker is moving laterally across multiple systems using legitimate tools and stolen credentials.
 
 Timeline of Events
-Week 1 (March 10-14, 2025)
+Week 1 (March 10-14, 2024)
 
 Initial compromise of a contractor laptop via a malicious npm package in a development project
 The attacker establishes minimal persistence using a modified Windows Management Instrumentation (WMI) subscription
 The attacker performs credential harvesting on the contractor's machine during nighttime hours
 No malware is deployed, only PowerShell commands using built-in Windows tools
-Week 2 (March 17-21, 2025)
+Week 2 (March 17-21, 2024)
 
 Using harvested credentials, the attacker accesses 3 different workstations, spending less than 30 minutes on each
 On each workstation, they run different reconnaissance commands:
@@ -102,12 +102,12 @@ Workstation 1: Network scanning using built-in net view commands
 Workstation 2: Permission enumeration using PowerShell Get-ACL
 Workstation 3: AD group enumeration using net group /domain commands
 All command execution happens during business hours, mimicking normal user activity
-Week 3 (March 24-28, 2025)
+Week 3 (March 24-28, 2024)
 
 The attacker discovers a service account with access to the payments processing server
 They establish multiple small-footprint access methods across 5 different endpoints
 Each endpoint contains a different piece of the attack chain, with no single system showing a complete attack pattern
-Week 4 (March 31-April 4, 2025)
+Week 4 (March 31-April 4, 2024)
 
 The attacker accesses the payment processing server for exactly 4 minutes
 They modify a transaction processing rule to redirect 0.1% of all transactions to fraudulent accounts
@@ -139,8 +139,8 @@ Alert 1: Distributed Reconnaissance Campaign
 Severity: High
 Detection: Multi-system Coordinated Reconnaissance
 Affected Systems: FDEV-JT01, FACCT-SR15, FADMIN-LP08, FITOPS-DM22
-First Detected: March 17, 2025 09:12:34
-Last Detected: March 21, 2025 16:45:22
+First Detected: March 17, 2024 09:12:34
+Last Detected: March 21, 2024 16:45:22
 Evidence: Similar command patterns executed across multiple systems
 User Accounts: 4 different user accounts executing similar commands
 Alert 2: Service Account Anomaly
@@ -149,7 +149,7 @@ Severity: Critical
 Detection: Abnormal Service Account Usage
 Account: svc_payment_proc@financial.com
 Affected Systems: 5 endpoints + FPAYMENT-PROD01
-Timeline: March 24-April 4, 2025
+Timeline: March 24-April 4, 2024
 Abnormal Behavior: Account used from 5 workstations never previously accessed
                     in 90-day baseline period
 Alert 3: Cross-System Attack Chain Detected
@@ -157,8 +157,8 @@ Alert 3: Cross-System Attack Chain Detected
 Severity: Critical
 Detection: Distributed Attack Chain
 Systems: 7 endpoints (detailed list in full report)
-Initial Access: FDEV-JT01.financial.local on March 10, 2025
-Final Target: FPAYMENT-PROD01.financial.local on April 3, 2025
+Initial Access: FDEV-JT01.financial.local on March 10, 2024
+Final Target: FPAYMENT-PROD01.financial.local on April 3, 2024
 Attack Path: Contractor → Development → Accounting → Admin → Payment Processing
 Attack Duration: 25 days with extremely low activity on any single endpoint
 
@@ -175,21 +175,21 @@ Background:
 A government agency is targeted by a nation-state actor using sophisticated fileless malware that evolves its behavior over time to evade detection. The malware operates entirely in memory, modifies its own code, and adjusts its behavior based on the environment.
 
 Timeline of Events
-Month 1 (February 2025)
+Month 1 (February 2024)
 
 Initial compromise occurs through a spear-phishing email with a malicious macro
 The macro launches a PowerShell script that injects shellcode directly into memory
 No files are written to disk; all operations occur in memory
 The malware establishes persistence through WMI event subscriptions and registry modifications
 Initial C2 communication occurs via DNS TXT records, with minimal traffic
-Month 2 (March 2025)
+Month 2 (March 2024)
 
 The malware begins to modify its own code in memory to evade signature detection
 It changes its network communication patterns every 72 hours
 System scanning occurs only when user activity is detected to blend with legitimate traffic
 The malware migrates between different processes (svchost.exe, explorer.exe, etc.) every few days
 Memory allocation patterns change dynamically based on the host environment
-Month 3 (April 2025)
+Month 3 (April 2024)
 
 The malware begins to use legitimate Windows APIs for reconnaissance
 It leverages different processes for different functions:
@@ -225,8 +225,8 @@ Alert 1: Memory Manipulation Evolution
 Severity: Critical
 Detection: Evolving Memory Injection Techniques
 Affected Processes: Multiple system and user processes
-First Detected: February 15, 2025
-Latest Detection: April 20, 2025
+First Detected: February 15, 2024
+Latest Detection: April 20, 2024
 Pattern: Memory allocation characteristics that evolve while maintaining operational patterns
 Evidence: 65 days of memory allocation telemetry showing coordinated evolution
 Alert 2: Process Migration Chain
@@ -234,7 +234,7 @@ Alert 2: Process Migration Chain
 Severity: High
 Detection: Systematic Process Migration
 Processes Involved: explorer.exe → svchost.exe → winlogon.exe → spoolsv.exe → wuauclt.exe
-Timeline: February-April 2025
+Timeline: February-April 2024
 Behavior: Consistent behavioral patterns despite migration between processes
 Pattern: Predictable migration timing with 72-hour intervals
 Alert 3: Multi-Channel Exfiltration Technique
@@ -242,6 +242,6 @@ Alert 3: Multi-Channel Exfiltration Technique
 Severity: Critical
 Detection: Distributed Data Exfiltration
 Exfiltration Channels: DNS queries, HTTPS traffic, WebSocket connections
-Timeline: March 5-April 28, 2025
+Timeline: March 5-April 28, 2024
 Data Volume: Estimated 300MB total over distributed channels
 Pattern: Coordinated exfiltration activities distributed across legitimate processes
