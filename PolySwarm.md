@@ -1,6 +1,6 @@
 # Integrating PolySwarm with Bayesian Traffic-Prism WAF
 
-Bayesian Traffic-Prism is an advacned  WAF enhancement that adds session intelligence and behavioral analysis on top of traditional firewalls. Integrating PolySwarm's decentralized threat intelligence marketplace could significantly strengthen your solution by adding crowdsourced security expertise. Here's how you could integrate them:
+Bayesian Traffic-Prism is an advacned  WAF enhancement that adds session intelligence and behavioral analysis on top of traditional firewalls. Integrating PolySwarm's decentralized threat intelligence marketplace could significantly strengthen  solution by adding crowdsourced security expertise. Here's how you could integrate them:
 
 ## Integration Architecture
 
@@ -8,8 +8,8 @@ Bayesian Traffic-Prism is an advacned  WAF enhancement that adds session intelli
 
 1. **Real-time Threat Intelligence Feed**
    - Create a new module in Traffic-Prism that subscribes to PolySwarm's API
-   - Use PolySwarm's threat intelligence to enhance your risk scoring engine
-   - Add new rule types in your `rules` table that reference PolySwarm verdicts
+   - Use PolySwarm's threat intelligence to enhance  risk scoring engine
+   - Add new rule types in  `rules` table that reference PolySwarm verdicts
 
 2. **Suspicious Session Analysis**
    - When Traffic-Prism identifies suspicious sessions that don't meet auto-termination thresholds
@@ -17,14 +17,14 @@ Bayesian Traffic-Prism is an advacned  WAF enhancement that adds session intelli
    - Security experts analyze them and provide verdicts (malicious/benign)
 
 3. **Rule Enhancement Loop**
-   - Use PolySwarm verdicts to automatically tune your risk model
+   - Use PolySwarm verdicts to automatically tune  risk model
    - Create a feedback loop where expert analysis improves future detection
 
 ## Implementation Steps
 
 ## Integration into Traffic-Prism
 
-To integrate this module with your Traffic-Prism WAF, follow these steps:
+To integrate this module with  Traffic-Prism WAF, follow these steps:
 
 1. **Install Dependencies**
    ```bash
@@ -32,11 +32,11 @@ To integrate this module with your Traffic-Prism WAF, follow these steps:
    ```
 
 2. **Add the PolySwarm Integration Module**
-   - Save the code above as `polyswarm-integration.js` in your project
-   - Add it to your server initialization in `app.js`
+   - Save the code above as `polyswarm-integration.js` in  project
+   - Add it to  server initialization in `app.js`
 
 3. **Update the Main Application**
-   Add these lines to your `app.js`:
+   Add these lines to  `app.js`:
 
    ```javascript
    // Near the top with other requires
@@ -47,7 +47,7 @@ To integrate this module with your Traffic-Prism WAF, follow these steps:
      .then(() => console.log('PolySwarm integration active'))
      .catch(err => console.error('Failed to initialize PolySwarm:', err));
    
-   // In your risk assessment logic, add:
+   // In  risk assessment logic, add:
    app.use(async (req, res, next) => {
      if (req.path === '/track' && req.body && req.body.url) {
        // Check URL against PolySwarm threat intelligence
@@ -61,17 +61,17 @@ To integrate this module with your Traffic-Prism WAF, follow these steps:
    ```
 
 4. **Enhance Risk Scoring**
-   Update your risk scoring to include PolySwarm intelligence:
+   Update  risk scoring to include PolySwarm intelligence:
 
    ```javascript
-   // In your risk scoring logic
+   // In  risk scoring logic
    if (session.polyswarm_threat === true) {
      session.risk_score += 30; // Significant risk increase for known threats
    }
    ```
 
 5. **Add PolySwarm Status to Dashboard**
-   Update your EJS templates to show PolySwarm analysis status:
+   Update  EJS templates to show PolySwarm analysis status:
 
    ```html
    <div class="card">
@@ -89,16 +89,16 @@ To integrate this module with your Traffic-Prism WAF, follow these steps:
 
 1. **Enhanced Threat Detection**
    - Leverage PolySwarm's network of security experts and engines
-   - Get verdicts on suspicious artifacts your WAF can't definitively classify
-   - Add real-time threat intelligence to your risk scoring model
+   - Get verdicts on suspicious artifacts  WAF can't definitively classify
+   - Add real-time threat intelligence to  risk scoring model
 
 2. **Continuous Improvement**
    - Automatically update rules based on expert analysis
-   - Create a feedback loop that makes your WAF more intelligent over time
+   - Create a feedback loop that makes  WAF more intelligent over time
    - Generate patterns for detecting similar threats in the future
 
 3. **Complementary Architecture**
-   - Your session-based monitoring pairs perfectly with PolySwarm's artifact analysis
+   -  session-based monitoring pairs perfectly with PolySwarm's artifact analysis
    - Traffic-Prism provides context that makes PolySwarm's analysis more effective
    - PolySwarm provides verdicts that increase Traffic-Prism's detection accuracy
 
