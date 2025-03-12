@@ -7,7 +7,7 @@ Background: A healthcare organization has been targeted by a sophisticated threa
 Timeline of Events
 Day 1 (March 1, 2025)
 
-A phishing email with a malicious attachment is opened by user chris.wong@healthcare.org
+A phishing email with a malicious attachment is opened by user (sample name) chris.wong@healthcare.org
 The attachment exploits a zero-day vulnerability in a PDF reader
 A small, encrypted implant is dropped to C:\ProgramData\Microsoft\Windows\SystemData\temp\svchost.dll
 The implant creates a scheduled task configured to only run after 45 days of system uptime
