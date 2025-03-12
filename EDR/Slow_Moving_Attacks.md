@@ -12,22 +12,33 @@ The attachment exploits a zero-day vulnerability in a PDF reader
 A small, encrypted implant is dropped to C:\ProgramData\Microsoft\Windows\SystemData\temp\svchost.dll
 The implant creates a scheduled task configured to only run after 45 days of system uptime
 The malicious DLL has valid digital signatures and mimics a legitimate Windows system file
+
+
+
 Day 45-47 (April 15-17, 2024)
+
 
 After 45 days of system uptime, the scheduled task activates
 The implant runs with low CPU utilization (< 2%) and minimal memory footprint
 It begins scanning internal network resources on non-standard hours (2-4 AM)
 The implant makes one outbound connection every 24 hours for 15 seconds to a legitimate-looking domain
+
+
+
 Day 60 (April 30, 2024)
 
 The implant begins exfiltrating patient data using steganography techniques
 Data is embedded within legitimate-looking HTTP traffic in small chunks
 The exfiltration occurs only on weekends and holidays
 Detection via OLAP Telemetry Analysis
+
+
 Process Timeline Anomaly:
 
 Bayesian EDR's longitudinal analysis identifies a new svchost.exe process that only appeared after 45 days of uptime
 The system flags the highly unusual activation pattern compared to process baselines
+
+
 Low-and-Slow Network Activity:
 
 Cross-correlation of network telemetry over 60 days reveals a consistent pattern of brief outbound connections
@@ -112,7 +123,10 @@ Initial compromise of a contractor laptop via a malicious npm package in a devel
 The attacker establishes minimal persistence using a modified Windows Management Instrumentation (WMI) subscription
 The attacker performs credential harvesting on the contractor's machine during nighttime hours
 No malware is deployed, only PowerShell commands using built-in Windows tools
+
+
 Week 2 (March 17-21, 2024)
+
 
 Using harvested credentials, the attacker accesses 3 different workstations, spending less than 30 minutes on each
 On each workstation, they run different reconnaissance commands:
@@ -120,17 +134,25 @@ Workstation 1: Network scanning using built-in net view commands
 Workstation 2: Permission enumeration using PowerShell Get-ACL
 Workstation 3: AD group enumeration using net group /domain commands
 All command execution happens during business hours, mimicking normal user activity
+
+
 Week 3 (March 24-28, 2024)
+
 
 The attacker discovers a service account with access to the payments processing server
 They establish multiple small-footprint access methods across 5 different endpoints
 Each endpoint contains a different piece of the attack chain, with no single system showing a complete attack pattern
+
+
 Week 4 (March 31-April 4, 2024)
+
 
 The attacker accesses the payment processing server for exactly 4 minutes
 They modify a transaction processing rule to redirect 0.1% of all transactions to fraudulent accounts
 The modification is made using legitimate admin tools with valid credentials
 Detection via OLAP Telemetry Analysis
+
+
 Cross-System Command Pattern Recognition:
 
 Bayesian EDR's OLAP analysis correlates similar command patterns across multiple workstations despite being executed by different users
@@ -140,14 +162,20 @@ Distributed Timeline Analysis:
 
 Longitudinal tracking identifies a clear progression of lateral movement despite low dwell time on individual endpoints
 Time-series correlation reveals the same remote IP connecting to multiple endpoints in a specific sequence
+
+
 Living-Off-The-Land Detection:
 
 Historical command-line telemetry across all endpoints reveals use of legitimate tools in suspicious sequences
 Bayesian behavioral analysis identifies abnormal usage patterns of standard Windows utilities
+
+
 Credential Use Analysis:
 
 Cross-system authentication telemetry reveals service account usage outside normal patterns
 Temporal analysis shows the account accessing systems it has never accessed in the 90-day baseline
+
+
 Multi-stage Threat Construction:
 
 OLAP query correlates seemingly unrelated events across dozens of endpoints
@@ -221,6 +249,7 @@ The malware establishes persistence through WMI event subscriptions and registry
 Initial C2 communication occurs via DNS TXT records, with minimal traffic
 
 
+
 Month 2 (March 2024)
 
 The malware begins to modify its own code in memory to evade signature detection
@@ -241,14 +270,23 @@ user applications for key logging
 Data exfiltration occurs by hiding within legitimate HTTPS traffic
 The malware's memory footprint continuously changes to avoid detection
 Detection via OLAP Telemetry Analysis
+
+
+
 Memory Pattern Evolution Tracking:
 
 Longitudinal analysis of memory characteristics reveals abnormal RWX segments across multiple processes
 Time-series analysis shows memory segments that morph but maintain similar operational patterns
+
+
+
 Process Relationship Timeline Analysis:
 
 Historical process telemetry reveals unusual parent-child relationships that evolve over time
 OLAP correlation identifies processes that consistently spawn other processes despite changing characteristics
+
+
+
 Network Behavior Correlation:
 
 Bayesian analysis of network telemetry across 90 days identifies communication patterns that change in predictable ways
@@ -259,6 +297,8 @@ Cross-Process Activity Mapping:
 
 Persistent tracking of system-wide behavior reveals malicious activities distributed across multiple processes
 Graph analysis connects disparate activities that traditional EDR would view as unrelated
+
+
 Behavioral Consistency Despite Technical Changes:
 
 Machine learning models applied to 90-day telemetry identify consistent behavioral patterns despite changing technical implementations
