@@ -14,4 +14,8 @@ test_full_detect.py is runnig implementation.
 
 cjs file is a sample referece implementation of agent to collect telemetry data in clickhouse.. In actual scenarios you may want to build it as exe in c++ or c# but thats ur choice. This is least resistance agent.
 
-You can query clickhouse and extract data in attack_data.csv and run above python scripts for slow moving attacks
+You can query clickhouse and extract data in attack_data.csv and run above python scripts for slow moving attacks.
+
+Please note main value is using sql based detection in clickhouse and develop advanced queries for your scenario cross WAF cross EDR something no commercial vendor even offers as they work either on EDR or WAF.
+ 
+Python code is for better understanding since most cybersec guys use python + EDR
