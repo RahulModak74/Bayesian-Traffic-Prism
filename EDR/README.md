@@ -6,7 +6,7 @@ Building on the momentum and community response to our WAF solution, we're now e
 
 We have opensourced some of the detection capabilities that many commercial vendors lack.
 
-We have uplaoded sysnthetic data to test 3 advanced cyber attacks which are slow moving, the exact kind of attacks happening now which lay dormant for days and sporadically exfiltreates as compelx attack chains
+We have uplaoded synthetic data (attack_dats.csv) to test 3 advanced cyber attacks which are slow moving, the exact kind of attacks happening now which lay dormant for days and sporadically exfiltreates as compelx attack chains
 
 full_detect.py is algorithms to detect attack vectors as identified the attack description file.
 
@@ -14,4 +14,4 @@ test_full_detect.py is runnig implementation.
 
 cjs file is a sample referece implementation of agent to collect telemetry data in clickhouse.. In actual scenarios you may want to build it as exe in c++ or c# but thats ur choice. This is least resistance agent.
 
-You can query clickhouse and extract data and run above python scripts for slow mvoing attacks
+You can query clickhouse and extract data in attack_data.csv and run above python scripts for slow mvoing attacks
