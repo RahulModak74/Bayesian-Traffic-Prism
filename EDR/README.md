@@ -24,7 +24,7 @@ Installation Steps:
 
 Follow detailed_documentation.md steps to install Clickhouse database (from the parent of this directory, Bayesian-Traffic-Prism main repo)
 
-Create table as in this directory..
+Create table as in this directory..(create_table_for_agent.sql)
 
 Run the Node agent on your required endpoints
 
