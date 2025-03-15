@@ -28,6 +28,6 @@ Create table as in this directory..
 
 Run the Node agent on your required endpoints
 
-Run OLAP query in this repo
+Run OLAP query in this repo (OLAP_SQL_detection.sql)
 
 Integrate with your SIEM thru csv export
