@@ -19,3 +19,15 @@ You can query clickhouse and extract data in attack_data.csv and run above pytho
 Please note main value is using sql based detection in clickhouse and develop advanced queries for your scenario cross WAF cross EDR something no commercial vendor even offers as they work either on EDR or WAF.
  
 Python code is for better understanding since most cybersec guys use python + EDR
+
+Installation Steps:
+
+Follow detailed_documentation.md steps to install Clickhouse database (from the parent of this directory, Bayesian-Traffic-Prism main repo)
+
+Create table as in this directory..
+
+Run the Node agent on your required endpoints
+
+Run OLAP query in this repo
+
+Integrate with your SIEM thru csv export
