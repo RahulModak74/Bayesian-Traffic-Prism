@@ -1,4 +1,28 @@
-Bayesian Traffic-Prism: Open-Source Web Security for All(https://www.youtube.com/watch?v=yvqCLUvt_vM)
+Bayesian Traffic-Prism: Open-Source  Security for All
+
+WAF: (https://www.youtube.com/watch?v=yvqCLUvt_vM)
+
+Our Architectural Innovation
+
+Unlike most open source projects trying to opensource watered-down commercial products, we're taking a top-down approach:
+
+• Open sourcing features even commercial products don't offer 
+
+• For WAF: Session intelligence 
+
+• For EDR: Slow moving attack detection (Pl see EDR folder in this repo)
+
+Our architecture introduces an OLAP layer based on ClickHouse with significant impact:
+
+• Central cybersecurity hub storing years of telemetry across thousands of devices
+
+ • Sub-second analysis capabilities 
+
+• Vendor-agnostic: Add Cisco/Juniper network switch/router telemetry by writing telemetry agents 
+
+• Continuous or interval-based telemetry collection
+
+ • Remediation through vendor tools/APIs like Defender for Windows or socket.io for WAF
 
 Bayesian Traffic-Prism is a pixel based WAF add on, to track  bots, score sessions, track DOM based advanced attacks and many more features.
 
