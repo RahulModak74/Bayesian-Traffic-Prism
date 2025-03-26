@@ -32,5 +32,5 @@ Run this script with a moderate level of concurrency (10-20 sessions)
 Show how FastNetMon fails to identify this as malicious traffic
 Then demonstrate how Traffic-Prism correctly identifies these sessions as automated/bot traffic
 
-Note that this script generates fewer requests per second than the previous one but creates much more sophisticated traffic that better represents the types of attacks Traffic-Prism is designed to detect.
+Note that this script generates fewer requests per second than the botnet.py one but creates much more sophisticated traffic that better represents the types of attacks Traffic-Prism is designed to detect.
 You can adjust the concurrent sessions parameter based on your testing system's capacity. Even 10-20 concurrent Playwright sessions can generate significant load, especially on smaller systems.
